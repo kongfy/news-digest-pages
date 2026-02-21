@@ -3,5 +3,5 @@
 Auto-published static news digest.
 
 - Latest digest: [index.html](./index.html)
-- Snapshot file: [digest-2026-02-20.html](./digest-2026-02-20.html)
-- Updated at: 2026-02-20 17:18:19 +0800
+- Snapshot file: [digest-2026-02-21.html](./digest-2026-02-21.html)
+- Updated at: 2026-02-21 08:18:47 +0800
