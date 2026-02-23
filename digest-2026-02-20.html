@@ -82,6 +82,39 @@
       white-space: nowrap;
     }
 
+    .tailnews-topbar-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .digest-date-select {
+      height: 28px;
+      max-width: 180px;
+      padding: 0 24px 0 8px;
+      border: 1px solid #374151;
+      border-radius: 6px;
+      background: #1f2937;
+      color: #f3f4f6;
+      font-size: 12px;
+      font-weight: 500;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #9ca3af 50%), linear-gradient(135deg, #9ca3af 50%, transparent 50%);
+      background-position: calc(100% - 12px) 11px, calc(100% - 7px) 11px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    .digest-date-select:focus {
+      outline: none;
+      border-color: #6b7280;
+      box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.3);
+    }
+
     .container {
       width: min(1200px, calc(100% - 24px));
       margin: 0 auto;
@@ -1014,6 +1047,18 @@
         font-size: 11px;
       }
 
+      .tailnews-topbar-tools {
+        gap: 6px;
+      }
+
+      .digest-date-select {
+        height: 24px;
+        max-width: 150px;
+        font-size: 11px;
+        padding: 0 22px 0 8px;
+        background-position: calc(100% - 11px) 9px, calc(100% - 7px) 9px;
+      }
+
       .container {
         width: min(100%, calc(100% - 12px));
         padding-top: 12px;
@@ -1189,6 +1234,11 @@
       }
 
       .tailnews-topbar-date {
+        font-size: 10px;
+      }
+
+      .digest-date-select {
+        max-width: 130px;
         font-size: 10px;
       }
 
@@ -1451,14 +1501,36 @@
 
       initCollapsibleCards();
       mobileQuery.addEventListener('change', initCollapsibleCards);
+
+      // Archive date selector
+      const digestDateSelect = document.getElementById('digestDateSelect');
+      if (digestDateSelect) {
+        digestDateSelect.addEventListener('change', (e) => {
+          const targetFile = e.target && e.target.value;
+          if (targetFile) {
+            window.location.href = targetFile;
+          }
+        });
+      }
     });
   </script>
 </head>
 <body>
-  <div class="tailnews-topbar">
+    <div class="tailnews-topbar">
     <div class="tailnews-topbar-inner">
       <div class="tailnews-topbar-brand">薯条时报</div>
-      <div class="tailnews-topbar-date">2026-02-20 星期五</div>
+      <div class="tailnews-topbar-tools">
+        <div class="tailnews-topbar-date">2026-02-20 星期五</div>
+        <select id="digestDateSelect" class="digest-date-select" aria-label="切换日期">
+          <option value="digest-2026-02-23.html">2026-02-23 星期一</option>
+          <option value="digest-2026-02-22.html">2026-02-22 星期日</option>
+          <option value="digest-2026-02-21.html">2026-02-21 星期六</option>
+          <option value="digest-2026-02-20.html" selected>2026-02-20 星期五</option>
+          <option value="digest-2026-02-19.html">2026-02-19 星期四</option>
+          <option value="digest-2026-02-18.html">2026-02-18 星期三</option>
+          <option value="digest-2026-02-16.html">2026-02-16 星期一</option>
+        </select>
+      </div>
     </div>
   </div>
 
