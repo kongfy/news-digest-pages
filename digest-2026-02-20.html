@@ -1505,6 +1505,27 @@
       // Archive date selector
       const digestDateSelect = document.getElementById('digestDateSelect');
       if (digestDateSelect) {
+        const currentDigestFile = digestDateSelect.dataset.currentFile;
+        fetch('archive.json', { cache: 'no-store' })
+          .then((resp) => (resp.ok ? resp.json() : null))
+          .then((archiveData) => {
+            const items = Array.isArray(archiveData)
+              ? archiveData
+              : (archiveData && Array.isArray(archiveData.items) ? archiveData.items : []);
+            if (!items.length) return;
+            digestDateSelect.innerHTML = items
+              .map((item) => {
+                const fileName = item.fileName || ('digest-' + item.date + '.html');
+                const label = item.label || [item.date, item.weekday].filter(Boolean).join(' ');
+                const selected = fileName === currentDigestFile ? ' selected' : '';
+                return '<option value="' + fileName + '"' + selected + '>' + label + '</option>';
+              })
+              .join('');
+          })
+          .catch(() => {
+            // Keep fallback option when archive manifest is temporarily unavailable.
+          });
+
         digestDateSelect.addEventListener('change', (e) => {
           const targetFile = e.target && e.target.value;
           if (targetFile) {
@@ -1516,19 +1537,12 @@
   </script>
 </head>
 <body>
-    <div class="tailnews-topbar">
+      <div class="tailnews-topbar">
     <div class="tailnews-topbar-inner">
       <div class="tailnews-topbar-brand">薯条时报</div>
       <div class="tailnews-topbar-tools">
-        <div class="tailnews-topbar-date">2026-02-20 星期五</div>
-        <select id="digestDateSelect" class="digest-date-select" aria-label="切换日期">
-          <option value="digest-2026-02-23.html">2026-02-23 星期一</option>
-          <option value="digest-2026-02-22.html">2026-02-22 星期日</option>
-          <option value="digest-2026-02-21.html">2026-02-21 星期六</option>
-          <option value="digest-2026-02-20.html" selected>2026-02-20 星期五</option>
-          <option value="digest-2026-02-19.html">2026-02-19 星期四</option>
-          <option value="digest-2026-02-18.html">2026-02-18 星期三</option>
-          <option value="digest-2026-02-16.html">2026-02-16 星期一</option>
+        <select id="digestDateSelect" class="digest-date-select" aria-label="切换日期" data-current-file="digest-2026-02-20.html">
+          <option value="digest-2026-02-20.html">2026-02-20 星期五</option>
         </select>
       </div>
     </div>
