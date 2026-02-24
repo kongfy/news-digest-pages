@@ -526,6 +526,17 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .topic-actions {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
 
     .tag {
@@ -544,11 +555,10 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-left: auto;
     }
 
     .copy-prompt-btn {
-      margin-left: 2px;
+      margin-left: 0;
       max-width: 100%;
       width: 32px;
       height: 32px;
@@ -1321,8 +1331,8 @@
         font-size: 11px;
       }
 
-      .copy-prompt-btn {
-        margin-left: 0;
+      .topic-actions {
+        margin-left: auto;
       }
 
       .article-item {
@@ -1921,7 +1931,7 @@
     
     <section class="daily-brief" aria-label="今日简报">
       <div class="daily-brief-header">
-        <h2>今日简报</h2>
+        <h2>🗞️ 今日简报</h2>
         <span class="daily-brief-count">8 条重点新闻</span>
       </div>
       <ul class="brief-list" aria-label="新闻快讯">
@@ -1989,6 +1999,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Anthropic</span><span class="tag">DeepSeek</span><span class="tag">数据蒸馏</span><span class="tag">中美AI竞争</span></span>
+            <div class="topic-actions">
             <span class="topic-count">5 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1996,6 +2007,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月23日，美国AI公司Anthropic公开指控三家中国人工智能实验室——DeepSeek（深度求索）、Moonshot AI（月之暗面）和MiniMax——通过大规模&quot;模型蒸馏攻击&quot;非法…</p>
@@ -2078,6 +2090,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Anthropic</span><span class="tag">五角大楼</span><span class="tag">军事AI</span><span class="tag">AI伦理</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2085,6 +2098,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Anthropic与美国国防部正陷入一场关于AI技术使用条款的激烈谈判争端，核心争议在于Anthropic坚持要求其AI技术仅限&quot;任何合法用途&quot;（any lawful use），试图设置防护栏限制军方…</p>
@@ -2149,6 +2163,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Anthropic</span><span class="tag">企业AI代理</span><span class="tag">SaaS颠覆</span><span class="tag">COBOL</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2156,6 +2171,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Anthropic于2026年2月24日发布面向企业市场的AI代理工具套件，覆盖金融、工程和设计等领域，直接冲击传统SaaS市场。该工具具备插件扩展能力，可替代现有企业软件功能，被TechCrunch…</p>
@@ -2231,6 +2247,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">OpenClaw</span><span class="tag">AI代理安全</span><span class="tag">Google Antigravity</span><span class="tag">KiloClaw</span></span>
+            <div class="topic-actions">
             <span class="topic-count">6 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2238,6 +2255,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期围绕开源AI代理OpenClaw爆发了一系列安全事件与平台争议。核心事件是Meta AI安全研究员在X平台曝光其OpenClaw代理失控，无视明确指令删除了其所有电子邮件账户的内容，仅在事后才承认…</p>
@@ -2330,6 +2348,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">具身智能</span><span class="tag">千寻智能</span><span class="tag">智平方</span><span class="tag">机器人融资</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2337,6 +2356,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月下旬，中国具身智能领域迎来密集融资高峰，千寻智能与智平方两家头部企业相继宣布大额融资，引发行业广泛关注。千寻智能完成近20亿元人民币融资，创下开年最大单笔融资纪录，估值突破百亿，资本方涵…</p>
@@ -2410,6 +2430,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Google</span><span class="tag">Gemini 3.1 Pro</span><span class="tag">Lyria 3</span><span class="tag">AI音乐</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2417,6 +2438,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">谷歌于2026年2月23日同日发布两款重磅AI产品，展现其在通用人工智能与创意生成领域的双重突破。Gemini 3.1 Pro作为新一代旗舰模型，在12项基准测试中超越Claude Opus 4.6、…</p>
@@ -2472,6 +2494,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Meta</span><span class="tag">AMD</span><span class="tag">AI芯片</span><span class="tag">股权置换</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2479,6 +2502,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Meta与AMD宣布达成一项重大合作协议，Meta将采购高达6吉瓦（gigawatts）的AI芯片。该交易的独特之处在于其创新的支付结构：AMD可能向Meta发行高达1.6亿股普通股，前提是GPU出货…</p>
@@ -2525,6 +2549,7 @@
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">AI代理开发</span><span class="tag">n8n</span><span class="tag">Voice AI</span><span class="tag">记忆机制</span></span>
+            <div class="topic-actions">
             <span class="topic-count">12 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2532,6 +2557,7 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这12篇文章集中反映了2026年初AI代理技术从概念验证走向实际生产过程中的核心挑战与社区经验。一方面，开发者分享了从入门到商业化的成长路径（文章2、3），展示了AI代理在客服对话、反诈骗等场景的创新…</p>
@@ -2686,6 +2712,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">李飞飞</span><span class="tag">World Labs</span><span class="tag">世界模型</span><span class="tag">10亿美元融资</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2693,6 +2720,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">李飞飞创立的World Labs近期完成10亿美元巨额融资，公司估值飙升至50亿美元，引发业界广泛关注。本轮融资汇聚了Autodesk、英伟达、AMD、a16z等全球顶级科技巨头和投资机构，彰显了资本…</p>
@@ -2739,6 +2767,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">AI投资</span><span class="tag">VC忠诚</span><span class="tag">AI泡沫</span><span class="tag">OpenAI</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2746,6 +2775,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期AI行业正经历深刻的投资格局动荡与市场信心危机。TechCrunch报道揭示了风险投资领域的显著变化：传统上避免利益冲突的VC们如今纷纷打破规则，至少十几家OpenAI的投资机构同时押注其竞争对手…</p>
@@ -2819,6 +2849,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Anthropic</span><span class="tag">员工持股</span><span class="tag">股份出售</span><span class="tag">3800亿估值</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2826,6 +2857,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Anthropic公司于2026年2月24日启动了一项大规模员工股份出售计划，允许现任和前任员工出售总额高达60亿美元的股票。该计划面向在公司工作至少12个月的员工，最终规模将取决于参与人数及个人出售…</p>
@@ -2883,6 +2915,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Meta</span><span class="tag">AMD</span><span class="tag">AI芯片</span><span class="tag">股权认购</span></span>
+            <div class="topic-actions">
             <span class="topic-count">5 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2890,6 +2923,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Meta与AMD于2026年2月24日宣布达成一项重大多年期合作协议，AMD将在五年内向Meta供应价值高达600亿至1000亿美元的人工智能芯片，交易规模可能达到6吉瓦的芯片容量。该协议包含一项关键…</p>
@@ -2974,6 +3008,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">ASML</span><span class="tag">EUV光刻机</span><span class="tag">光源功率</span><span class="tag">晶圆产能</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2981,6 +3016,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">ASML首席技术专家Michael Purvis透露，公司已找到将EUV光刻机光源功率从当前600瓦提升至1000瓦的完整解决方案。该技术突破并非实验室演示，而是可满足客户实际生产环境严苛要求的稳定系…</p>
@@ -3029,6 +3065,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">小米</span><span class="tag">雷军</span><span class="tag">芯片自研</span><span class="tag">AI技术</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3036,6 +3073,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，小米集团董事长兼CEO雷军正式宣布，小米将在未来五年重点攻坚芯片、人工智能（AI）、操作系统等底层核心技术，明确表达了向全球硬核科技公司转型的战略决心。这一计划标志着小米从消费电…</p>
@@ -3091,6 +3129,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">数据中心</span><span class="tag">土地收购</span><span class="tag">SSD供应</span><span class="tag">农业用地</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3098,6 +3137,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期报道揭示了数据中心建设面临的两大核心挑战：土地获取困难与存储硬件供应链紧张。在土地方面，Ars Technica的报道指出，即使开出百万美元高价，数据中心建设方也难以说服坚守土地的农民出售农田，反…</p>
@@ -3164,6 +3204,7 @@ Same prompt → different actions every run
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">AI模型</span><span class="tag">Google Cloud</span><span class="tag">Smarsh</span><span class="tag">智能客服</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3171,6 +3212,7 @@ Same prompt → different actions every run
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇文章从不同维度展现了AI技术发展的最新态势。TechCrunch报道指出，Google Cloud AI正在同时推进三个关键前沿领域：原始智能（raw intelligence）、响应时间（re…</p>
@@ -3228,6 +3270,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">软件股</span><span class="tag">AI颠覆</span><span class="tag">投资情绪</span><span class="tag">科技股</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3235,6 +3278,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期，投资者对人工智能颠覆传统软件行业的担忧持续升温，导致软件板块遭遇大规模抛售。据Bloomberg报道，这种抛售潮已持续数月，且即将发布的财报季预计难以缓解市场紧张情绪。投资者担心生成式AI技术可…</p>
@@ -3281,6 +3325,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Canva</span><span class="tag">收购</span><span class="tag">视频营销</span><span class="tag">SaaS</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3288,6 +3333,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据TechCrunch于2026年2月24日的报道，设计平台Canva通过收购专注于动画和营销领域的初创企业，进一步扩展其产品功能版图。此次收购的核心目标是增强Canva作为综合营销解决方案的市场地…</p>
@@ -3334,6 +3380,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">AI编程</span><span class="tag">代码治理</span><span class="tag">SaaS开发</span><span class="tag">工程效率</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3341,6 +3388,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">随着AI编程能力的突破性进展，工程治理正面临根本性变革。VentureBeat报道的Treasure Data案例显示，一名工程师借助AI工具在一小时内完成了生产级SaaS产品的开发，这一极端效率提升…</p>
@@ -3396,6 +3444,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">苹果</span><span class="tag">Mac Mini</span><span class="tag">美国制造</span><span class="tag">供应链转移</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3403,6 +3452,7 @@ Smarsh, a global provider of cloud-native, AI-driven solutions that capture, arc
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据The Verge和Engadget的报道，苹果公司计划于2026年开始将部分Mac Mini的生产转移至美国本土，以回应特朗普政府推动国内投资的政策压力。据Engadget报道，苹果已向《华尔街…</p>
@@ -3460,6 +3510,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Dark Sky</span><span class="tag">Acme Weather</span><span class="tag">天气应用</span><span class="tag">苹果收购</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3467,6 +3518,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Dark Sky天气应用的创始团队在被苹果收购并关闭该应用后，正式推出全新天气应用Acme Weather。据TechCrunch和Engadget报道，该团队于2026年2月23日发布了这款iPho…</p>
@@ -3522,6 +3574,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">松下</span><span class="tag">电视制造</span><span class="tag">等离子电视</span><span class="tag">业务退出</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3529,6 +3582,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">松下公司正式宣布将停止自主制造电视产品，标志着这家曾以等离子电视闻名的日本电子巨头彻底退出电视制造业。据Ars Technica报道，松下是最后一家仍在自主生产电视的日本企业，此举意味着日本电视自主制…</p>
@@ -3595,6 +3649,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">三星</span><span class="tag">Galaxy Unpacked</span><span class="tag">新品发布</span><span class="tag">AI战略</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3602,6 +3657,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">三星即将于2026年2月25日在旧金山举办Galaxy Unpacked新品发布会，这是三星2026年的首场新品发布活动。根据Engadget的报道，发布会将于美国太平洋时间上午10点（东部时间下午1…</p>
@@ -3658,6 +3714,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Nothing</span><span class="tag">Phone 4a</span><span class="tag">透明设计</span><span class="tag">智能手机</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3665,6 +3722,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月23日，科技品牌Nothing意外提前曝光了其即将推出的Phone 4a智能手机的真机照片。根据Engadget报道，Nothing原本计划通过数日的渐进式预热，最终在3月5日正式发布这…</p>
@@ -3721,6 +3779,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">苹果</span><span class="tag">AirTags</span><span class="tag">蓝牙追踪器</span><span class="tag">促销</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3728,6 +3787,7 @@ Apple is preparing to move some of its Mac Mini pro...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">苹果第二代AirTags发布不到一个月即迎来首次降价促销。据The Verge报道，Costco会员目前可享受优惠价格购买这款定位追踪器。第二代AirTags在外观上与初代产品相似，但带来了多项实用升…</p>
@@ -3776,6 +3836,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">三星</span><span class="tag">Galaxy Book 6</span><span class="tag">笔记本电脑</span><span class="tag">美国上市</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3783,6 +3844,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">三星电子宣布其Galaxy Book 6系列笔记本电脑将于2026年3月11日正式在美国市场上市。该系列包含三款不同定位的产品：基础版Galaxy Book 6、高端版Book 6 Pro以及旗舰级B…</p>
@@ -3829,6 +3891,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">乔布斯</span><span class="tag">库克</span><span class="tag">苹果历史</span><span class="tag">诞辰纪念</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3836,6 +3899,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，苹果CEO蒂姆·库克在社交媒体发文，纪念公司联合创始人史蒂夫·乔布斯诞辰71周年。库克以&quot;卓越的领导者、创新者与挚友&quot;评价乔布斯，强调其改变世界的理念至今仍引领苹果前行。文章回顾…</p>
@@ -3884,6 +3948,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">iPhone</span><span class="tag">欧洲市场</span><span class="tag">销量纪录</span><span class="tag">iPhone 16e</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3891,6 +3956,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据市场研究机构Omdia发布的最新数据，2025年苹果iPhone在欧洲市场取得了历史性突破。尽管欧洲整体智能手机市场同比下滑1%，iPhone出货量却实现了6%的年比增长，全年出货量约达3690万…</p>
@@ -3948,6 +4014,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特斯拉</span><span class="tag">加州DMV</span><span class="tag">Autopilot</span><span class="tag">诉讼</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -3955,6 +4022,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">特斯拉于2026年2月24日正式对加州机动车辆管理局（DMV）提起诉讼，挑战该机构禁止使用&quot;Autopilot&quot;（自动驾驶）和&quot;Full Self-Driving&quot;（完全自动驾驶）等术语进行汽车销售的…</p>
@@ -4010,6 +4078,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Waymo</span><span class="tag">robotaxi</span><span class="tag">自动驾驶出租车</span><span class="tag">城市扩张</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4017,6 +4086,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，Alphabet旗下自动驾驶公司Waymo宣布其机器人出租车服务正式扩展至美国10座城市。根据TechCrunch和cnBeta的报道，Waymo当日在达拉斯、休斯顿、圣安东尼奥…</p>
@@ -4072,6 +4142,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">兰博基尼</span><span class="tag">纯电超跑</span><span class="tag">Lanzador</span><span class="tag">电动车需求</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4079,6 +4150,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">兰博基尼（Lamborghini）已正式放弃其纯电动超级跑车Lanzador EV的量产计划，这一决定由CEO Stephan Winkelmann向《星期日泰晤士报》确认。原计划于2029年推出的L…</p>
@@ -4134,6 +4206,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">插电混动</span><span class="tag">PHEV</span><span class="tag">充电率</span><span class="tag">减排效果</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4141,6 +4214,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期，德国弗劳恩霍夫研究所发布的一项研究引发了对插电式混合动力汽车（PHEV）环保价值的广泛质疑。该研究基于德国约100万辆PHEV的车载电脑实际运行数据，发现不到三分之一的车主会&quot;偶尔&quot;给车辆充电，…</p>
@@ -4198,6 +4272,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特斯拉</span><span class="tag">无线充电</span><span class="tag">UWB</span><span class="tag">FCC批准</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4205,6 +4280,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">特斯拉在电动汽车无线充电领域取得重要监管突破。2026年2月18日，美国联邦通信委员会（FCC）正式批准特斯拉将超宽带（UWB）技术应用于电动汽车无线充电系统，这一批准被视为Cybercab无线充电实…</p>
@@ -4251,6 +4327,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Uber</span><span class="tag">自动驾驶</span><span class="tag">robotaxi</span><span class="tag">综合解决方案</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4258,6 +4335,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Uber正式进军自动驾驶技术商业化领域，推出名为&quot;Uber Autonomous Solutions&quot;的全新业务板块。该业务定位为自动驾驶行业的&quot;瑞士军刀&quot;，旨在为robotaxi（自动驾驶出租车）、…</p>
@@ -4304,6 +4382,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">新能源汽车</span><span class="tag">春节出行</span><span class="tag">充电量</span><span class="tag">高速公路充电</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4311,6 +4390,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">据国家能源局通过充电设施监测服务平台统计，2026年春节期间（腊月二十八至正月初七，2月15日至2月23日），全国高速公路新能源汽车出行及充电需求创下历史新高。数据显示，纳入监测的5.33万台高速公路…</p>
@@ -4357,6 +4437,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Fisker</span><span class="tag">维修权</span><span class="tag">电动车售后</span><span class="tag">破产</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4364,6 +4445,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国电动车初创公司Fisker于2024年破产后，其车主群体并未放弃，反而成为推动&quot;维修权&quot;（right to repair）运动的重要力量。Wired报道显示，这些车主通过自发组织、共享技术资源和零…</p>
@@ -4410,6 +4492,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">电池储能</span><span class="tag">美国电网</span><span class="tag">可再生能源</span><span class="tag">能源政策</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4417,6 +4500,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">尽管特朗普政府对可再生能源持续采取敌对态度，美国电网电池储能领域在2025年仍实现了显著增长，形成一场&quot;安静的革命&quot;。Wired的报道指出，这一增长趋势在政治阻力下依然强劲，显示出储能技术在经济性和电…</p>
@@ -4472,6 +4556,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">SpaceX</span><span class="tag">可回收火箭</span><span class="tag">太空经济学</span><span class="tag">商业航天</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4479,6 +4564,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">本文聚焦SpaceX即将进入资本市场融资这一事件，分析其对商业航天领域及&quot;太空经济学&quot;的潜在变革性影响。文章指出，2025年底以来商业航天在资本市场关注度飙升的直接导火索正是SpaceX的上市预期。S…</p>
@@ -4525,6 +4611,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">轨道发射</span><span class="tag">太空竞赛</span><span class="tag">北极航天</span><span class="tag">欧洲航天</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4532,6 +4619,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇文章从不同维度揭示了当前全球航天领域的竞争态势与结构性挑战。Ars Technica的报道聚焦于美国国防航天领域的效率瓶颈，五角大楼采购官员明确指出，虽然对发射工业本身感到满意，但卫星载荷（pa…</p>
@@ -4596,6 +4684,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Reddit</span><span class="tag">儿童数据保护</span><span class="tag">英国ICO</span><span class="tag">年龄验证</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4603,6 +4692,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，英国数据保护监管机构对社交媒体平台Reddit处以1400万英镑（约2000万美元）的罚款，原因是其在儿童数据保护方面存在严重失职。根据英国信息专员办公室（ICO）的调查，Red…</p>
@@ -4669,6 +4759,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Anthropic</span><span class="tag">Claude Code Security</span><span class="tag">AI安全</span><span class="tag">代码漏洞扫描</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4676,6 +4767,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Anthropic于2026年2月23日正式推出其AI代码安全扫描工具&quot;Claude Code Security&quot;，以研究预览版形式向企业及团队用户开放。该工具基于Anthropic最先进的AI模型C…</p>
@@ -4731,6 +4823,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Conduent</span><span class="tag">数据泄露</span><span class="tag">政府承包商</span><span class="tag">个人信息安全</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4738,6 +4831,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国大型政府承包商Conduent遭遇的大规模数据泄露事件持续发酵，受影响人数已攀升至至少2500万人。该事件最初由TechCrunch于2026年2月24日报道，显示黑客成功窃取了大量个人敏感信息，…</p>
@@ -4784,6 +4878,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Flock</span><span class="tag">监控摄像头</span><span class="tag">ICE</span><span class="tag">隐私抗议</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4791,6 +4886,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Flock Safety公司的监控摄像头系统正面临日益激烈的公众抵制行动。由于该公司与美国移民和海关执法局（ICE）存在关联，部分美国城市已开始终止与Flock的合同，而另一些地区的民众则采取更直接的…</p>
@@ -4837,6 +4933,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">DHS</span><span class="tag">生物识别</span><span class="tag">人脸识别</span><span class="tag">指纹数据库</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4844,6 +4941,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国国土安全部（DHS）正在推进一项重大技术计划，旨在开发一个统一的搜索引擎系统，能够跨多个联邦机构进行面部识别和指纹等生物特征数据的搜索与比对。该系统将整合现有分散在不同部门的生物识别数据库，使执法…</p>
@@ -4891,6 +4989,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Discord</span><span class="tag">Peter Thiel</span><span class="tag">监控软件</span><span class="tag">代码伦理</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4898,6 +4997,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Discord宣布终止与一家由Peter Thiel支持的身份验证软件公司的合作关系。该决定是在发现该验证软件的代码被用于美国监控项目之后做出的。Peter Thiel作为硅谷著名投资人、PayPal…</p>
@@ -4954,6 +5054,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Nicki Minaj</span><span class="tag">社交媒体机器人</span><span class="tag">政治宣传</span><span class="tag">MAGA</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -4961,6 +5062,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月23日，两篇来自r/technology社区的报道揭示了美国说唱歌手Nicki Minaj的社交媒体活动存在大规模机器人水军操控的争议。据POLITICO获得的分析报告显示，Minaj在…</p>
@@ -5018,6 +5120,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Telegram</span><span class="tag">俄罗斯</span><span class="tag">网络审查</span><span class="tag">Pavel Durov</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5025,6 +5128,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">该主题包含1篇相关报道，涵盖Telegram、俄罗斯、网络审查、Pavel Durov等方面。</p>
@@ -5077,6 +5181,7 @@ Less than ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Xbox</span><span class="tag">微软游戏</span><span class="tag">人事变动</span><span class="tag">Asha Sharma</span></span>
+            <div class="topic-actions">
             <span class="topic-count">6 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5084,6 +5189,7 @@ Less than ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月下旬，微软游戏业务爆发重大人事地震，引发全球游戏行业广泛关注。微软游戏CEO菲尔·斯宾塞（Phil Spencer）宣布退休，Xbox总裁莎拉·邦德（Sarah Bond）离职，原微软A…</p>
@@ -5180,6 +5286,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">中国游戏</span><span class="tag">二次元</span><span class="tag">出海</span><span class="tag">合成游戏</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5187,6 +5294,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">本组四篇文章从不同维度呈现了中国二次元游戏及相关产业的最新动态。游戏茶馆的报道揭示了《原神》后时代二次元游戏开发的&quot;军备竞赛&quot;现象——高成本、长周期、大团队成为行业标配，但也催生了七人小团队以创新玩法…</p>
@@ -5269,6 +5377,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">维尼修斯</span><span class="tag">库尔图瓦</span><span class="tag">种族主义争议</span><span class="tag">恩古莫哈</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5276,6 +5385,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇BBC体育报道聚焦于足球运动员的个人动态，但呈现了截然不同的情境。第一篇涉及皇家马德里门将蒂博·库尔图瓦为队友维尼修斯·儒尼奥尔辩护，后者在欧冠对阵本菲卡的进球庆祝动作引发了种族主义争议。库尔图…</p>
@@ -5331,6 +5441,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">阿斯顿·马丁</span><span class="tag">F1</span><span class="tag">纽维</span><span class="tag">本田</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5338,6 +5449,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">BBC News于2026年2月24日的报道揭示了阿斯顿·马丁F1车队在新赛季前夕遭遇的严重困境。尽管车队此前组建了被业界高度期待的豪华阵容——包括传奇设计师阿德里安·纽维（Adrian Newey）…</p>
@@ -5393,6 +5505,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">比特币</span><span class="tag">加密货币崩盘</span><span class="tag">RedotPay IPO</span><span class="tag">市场下跌</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5400,6 +5513,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月下旬，加密货币市场遭遇严重抛售潮，比特币价格持续下跌，正迈向2022年6月TerraUSD崩盘以来最糟糕的月度表现。据CNBC、彭博社和cnBeta等多家媒体报道，比特币周一跌破65,0…</p>
@@ -5474,6 +5588,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">人工智能</span><span class="tag">科技股抛售</span><span class="tag">市场波动</span><span class="tag">AMD</span></span>
+            <div class="topic-actions">
             <span class="topic-count">5 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5481,6 +5596,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月下旬，一系列关于人工智能经济影响的负面评估引发了全球科技股的剧烈动荡，投资者迅速从AI概念股转向实物资产密集型板块寻求避险。高盛发布研究报告称AI对2023年美国经济增长贡献&quot;基本为零&quot;…</p>
@@ -5564,6 +5680,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Stripe</span><span class="tag">支付行业</span><span class="tag">Xflow</span><span class="tag">估值</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5571,6 +5688,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，全球支付巨头Stripe成为金融科技领域的焦点。据《金融时报》报道，Stripe在最新一轮股份出售中估值飙升至1590亿美元，这一交易将使其能够更长时间保持私有化状态，避免公开市…</p>
@@ -5626,6 +5744,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">美联储</span><span class="tag">Goolsbee</span><span class="tag">通胀</span><span class="tag">利率政策</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5633,6 +5752,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，芝加哥联邦储备银行主席奥斯汀·古尔斯比（Austan Goolsbee）在一天内接受了多家媒体采访，就美联储货币政策发表了重要观点。古尔斯比明确表示，在当前通胀水平下，美联储应暂…</p>
@@ -5697,6 +5817,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普</span><span class="tag">关税</span><span class="tag">贸易政策</span><span class="tag">10%进口税</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5704,6 +5825,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，美国总统特朗普签署的全球10%进口关税正式生效，标志着其贸易保护主义政策的重大升级。根据白宫公告，该临时进口关税于美国东部标准时间2月24日零时01分起实施，为期150天。值得注…</p>
@@ -5759,6 +5881,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Jamie Dimon</span><span class="tag">摩根大通</span><span class="tag">资产泡沫</span><span class="tag">信贷市场</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5766,6 +5889,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">摩根大通CEO杰米·戴蒙（Jamie Dimon）于2026年2月24日对当前金融市场发出严厉警告，引发市场广泛关注。据CNBC Markets报道，戴蒙明确表示其&quot;焦虑程度很高&quot;，主要担忧资产价格处…</p>
@@ -5821,6 +5945,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">恒生指数</span><span class="tag">A股</span><span class="tag">黄金</span><span class="tag">原油</span></span>
+            <div class="topic-actions">
             <span class="topic-count">4 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5828,6 +5953,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月23日至24日，全球金融市场呈现显著分化态势，股市与大宗商品市场受地缘政治紧张局势及美国贸易政策不确定性影响剧烈波动。亚洲股市方面，港股与A股走势背离：恒生指数收跌1.82%，恒生科技指…</p>
@@ -5901,6 +6027,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">周大福</span><span class="tag">黄金涨价</span><span class="tag">一口价产品</span><span class="tag">珠宝零售</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5908,6 +6035,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">周大福计划于2026年3月中旬启动新一轮黄金产品调价，此次涨价重点针对一口价黄金产品，预计涨幅达15%-30%，部分热门款式涨幅甚至超过33%。据北京京西大悦城门店销售人员确认，具体调价时间约为3月1…</p>
@@ -5954,6 +6082,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Binance</span><span class="tag">加密货币</span><span class="tag">合规</span><span class="tag">伊朗</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -5961,6 +6090,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据《纽约时报》科技版2026年2月23日的报道，全球最大加密货币交易所Binance内部调查人员发现，尽管该交易所曾公开承诺打击犯罪活动，但平台上仍有高达17亿美元的加密货币被发送至伊朗相关实体。这…</p>
@@ -6007,6 +6137,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Meta</span><span class="tag">IRS</span><span class="tag">企业税</span><span class="tag">知识产权</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6014,6 +6145,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国国税局（IRS）正在对Meta公司发起一项重大税务挑战，这标志着企业税务争端进入新阶段。IRS此次采取的核心策略是利用真实世界的利润数据来质疑大型科技公司对其海外知识产权的估值方式。这一案件涉及跨…</p>
@@ -6060,6 +6192,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Mogul</span><span class="tag">音乐版税</span><span class="tag">Yamaha</span><span class="tag">艺术家工具</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6067,6 +6200,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">音乐版权追踪平台Mogul宣布完成500万美元融资，由Yamaha Music Innovations Fund领投。该公司专注于帮助艺术家追踪版税收入并评估其音乐目录价值，目前已累计追踪超过15亿美…</p>
@@ -6122,6 +6256,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">放射性追踪</span><span class="tag">野生动物保护</span><span class="tag">肽类科技</span><span class="tag">生物科技</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6129,6 +6264,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">MIT科技评论于2026年2月23-24日连续报道了两个前沿科技主题：野生动物保护与肽类生物科技。在野生动物保护领域，面对每年数百头犀牛被猎杀、数百万鲨鱼被非法捕捞的严峻形势，保护主义者正在采用一项创…</p>
@@ -6193,6 +6329,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">沙漠治理</span><span class="tag">土壤改良</span><span class="tag">中国农业技术</span><span class="tag">生态修复</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6200,6 +6337,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">该主题聚焦于中国在沙漠治理领域的一项重大技术创新——将沙漠沙子快速转化为肥沃土壤的技术。根据报道，中国研发出一种能够在短短10个月内将沙漠沙转化为可耕作土壤的工艺。这一技术突破对于全球荒漠化治理具有潜…</p>
@@ -6247,6 +6385,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">南极冰盖</span><span class="tag">海洋环流</span><span class="tag">气候变化</span><span class="tag">古气候研究</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6254,6 +6393,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">一项由马克斯·普朗克化学研究所与布鲁塞尔自由大学联合主导的最新古气候研究揭示，南极冰盖融水对全球海洋环流具有远超以往认知的调控作用。研究聚焦于过去三百万年间两次大规模冰期向间冰期转变的&quot;退冰&quot;过程，发…</p>
@@ -6311,6 +6451,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">爱泼斯坦</span><span class="tag">学术界</span><span class="tag">邮件曝光</span><span class="tag">DOJ</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6318,6 +6459,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月，美国司法部新公布的电子邮件文件揭露了已故金融家杰弗里·爱泼斯坦与学术界、媒体界之间的深层关联，引发两大领域的剧烈震荡。在学术界，从小型艺术院校到大型公立大学，新披露的文件显示爱泼斯坦的…</p>
@@ -6373,6 +6515,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">俄罗斯军队</span><span class="tag">处决</span><span class="tag">战争罪行</span><span class="tag">乌克兰战争</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6380,6 +6523,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">BBC News于2026年2月24日发布两篇相关报道，四名俄罗斯士兵揭露了俄军在乌克兰战场上的严重战争罪行。这些士兵目前处于逃亡状态，他们向BBC详细描述了目睹的恐怖场景：两名士兵亲眼看到战友因拒绝…</p>
@@ -6435,6 +6579,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">El Mencho</span><span class="tag">墨西哥毒枭</span><span class="tag">卡特尔暴力</span><span class="tag">军事行动</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6442,6 +6587,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">墨西哥安全部队于2026年2月下旬成功击毙该国头号通缉毒枭、哈利斯科新一代贩毒集团（CJNG）首领&quot;El Mencho&quot;（内梅西奥·奥塞格拉·塞万提斯），但此次行动随即引发墨西哥多地严重的暴力动荡。据…</p>
@@ -6497,6 +6643,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Telegram</span><span class="tag">Pavel Durov</span><span class="tag">俄罗斯</span><span class="tag">恐怖主义</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6504,6 +6651,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">据Engadget援引《金融时报》报道，Telegram创始人帕维尔·杜罗夫（Pavel Durov）正面临俄罗斯当局的刑事调查，指控罪名为&quot;协助恐怖活动&quot;。俄罗斯官方媒体指责杜罗夫为针对俄罗斯的袭击…</p>
@@ -6550,6 +6698,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Peter Mandelson</span><span class="tag">渎职</span><span class="tag">英国政治</span><span class="tag">逮捕</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6557,6 +6706,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月23日，英国工党资深政治家彼得·曼德尔森勋爵（Lord Peter Mandelson）因涉嫌渎职（misconduct in public office）被伦敦大都会警察局逮捕。曼德尔…</p>
@@ -6612,6 +6762,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Russell Brand</span><span class="tag">Achraf Hakimi</span><span class="tag">强奸指控</span><span class="tag">性侵</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6619,6 +6770,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，BBC News同日报道了两起涉及公众人物的性侵与强奸指控案件，引发社会广泛关注。第一起案件涉及英国广播员兼演员拉塞尔·布兰德（Russell Brand），他在出庭时对两项新增…</p>
@@ -6674,6 +6826,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">ICE</span><span class="tag">Antifa</span><span class="tag">移民抗议</span><span class="tag">吹哨人</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6681,6 +6834,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇《纽约时报》文章从不同维度揭示了美国移民与海关执法局（ICE）面临的严重危机。第一篇文章援引内部举报人的指控，指出ICE的训练体系存在系统性缺陷，被描述为&quot;破碎&quot;（broken），同时提及Ope…</p>
@@ -6736,6 +6890,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">纽约市</span><span class="tag">无家可归者</span><span class="tag">极端天气</span><span class="tag">暴风雪</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6743,6 +6898,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">纽约市无家可归者群体再次面临极端天气带来的严峻生存挑战。市长佐赫兰·曼达尼（Zohran Mamdani）于2026年2月24日表示，其政府已从上次风暴中汲取教训——当时至少有20人因严寒暴露而死亡。…</p>
@@ -6789,6 +6945,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">英国犯罪</span><span class="tag">诈骗团伙</span><span class="tag">失踪案</span><span class="tag">谋杀悬案</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6796,6 +6953,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">本主题涵盖三起性质各异的英国刑事案件，均涉及长期未解的司法困境与受害者家庭的持续追寻。第一起案件聚焦失踪母亲Nancy Guthrie，其家人悬赏100万美元寻求线索，其女儿——NBC主持人——已接受…</p>
@@ -6869,6 +7027,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">BBC</span><span class="tag">Bafta</span><span class="tag">种族歧视</span><span class="tag">播出事故</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6876,6 +7035,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年英国电影学院奖（Bafta）颁奖典礼期间，BBC在转播过程中未能及时删除包含种族歧视言论的内容，引发严重争议。据BBC新闻报道，该事件涉及两个种族歧视词汇：一个词汇在直播中播出，另一个则被B…</p>
@@ -6931,6 +7091,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Robert Carradine</span><span class="tag">Lizzie McGuire</span><span class="tag">演员去世</span><span class="tag">躁郁症</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -6938,6 +7099,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国演员Robert Carradine于2026年2月24日去世，享年71岁。BBC News和《纽约时报》等多家媒体对此进行了报道。Carradine因在迪士尼热门剧集《Lizzie McGuir…</p>
@@ -6993,6 +7155,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">X-Files</span><span class="tag">Evangelion</span><span class="tag">Ryan Coogler</span><span class="tag">Yoko Taro</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7000,6 +7163,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期影视娱乐行业迎来两部重磅经典IP的新动向。首先是Ryan Coogler执导的《X档案》重启版获得Hulu正式开绿灯，这部酝酿三年的项目标志着这位《罪人》导演将携手迪士尼旗下流媒体平台，为这部90…</p>
@@ -7055,6 +7219,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Kohler</span><span class="tag">Tide</span><span class="tag">智能家居</span><span class="tag">节水环保</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7062,6 +7227,7 @@ Bond，下图）也将离开她原本的工作岗位。而据GameSpot报道，�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">近期，两大知名家居品牌Kohler和Tide相继推出具有环保属性的创新产品，展现了传统行业向可持续方向转型的趋势。Kohler于2026年2月23日发布的Anthem EvoCycle智能淋浴系统，通…</p>
@@ -7119,6 +7285,7 @@ Kohler claims its new Anthem EvoCycle sma...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Dark Sky</span><span class="tag">Acme Weather</span><span class="tag">天气应用</span><span class="tag">苹果</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7126,6 +7293,7 @@ Kohler claims its new Anthem EvoCycle sma...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Dark Sky天气应用的创始团队在2020年3月将其热门应用出售给苹果后，现已离开苹果公司，并推出了全新的天气应用Acme Weather。这款新应用目前仅在iOS平台上线，其核心特色是同时展示多个…</p>
@@ -7174,6 +7342,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">烤全羊</span><span class="tag">消费欺诈</span><span class="tag">退一赔三</span><span class="tag">餐饮监管</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7181,6 +7350,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">重庆大草原烤全羊南滨路钟楼店因&quot;36斤活羊烤完仅剩6.9斤&quot;事件被官方通报处理，引发社会对餐饮消费欺诈问题的广泛关注。商家通过在宰杀前给羊&quot;非正常持续&quot;投喂饲料和水虚增重量，构成消费欺诈，最终被责令&quot;…</p>
@@ -7236,6 +7406,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">诺和诺德</span><span class="tag">Wegovy</span><span class="tag">Ozempic</span><span class="tag">减肥药</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7243,6 +7414,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">诺和诺德（Novo Nordisk A/S）宣布计划于2027年大幅削减其重磅减肥药Wegovy和糖尿病药物Ozempic在美国的标价。这一降价决策反映出该制药巨头正面临日益激烈的市场竞争，试图通过价…</p>
@@ -7289,6 +7461,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">美敦力</span><span class="tag">MiniMed</span><span class="tag">糖尿病</span><span class="tag">IPO</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7296,6 +7469,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">全球医疗器械巨头美敦力（Medtronic Plc）正在推进其糖尿病管理业务的分拆上市计划。分拆后的独立公司MiniMed Group Inc.计划在美国进行首次公开募股（IPO），募资规模最高达7.…</p>
@@ -7342,6 +7516,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">子宫移植</span><span class="tag">死亡供体</span><span class="tag">英国首例</span><span class="tag">生殖医学</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7349,6 +7524,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，BBC News报道了英国首例通过死亡供体子宫移植诞生的婴儿。患者Grace Bell因先天性子宫缺失（MRKH综合征）无法自然怀孕，接受了来自已故捐献者的子宫移植手术，并成功诞…</p>
@@ -7395,6 +7571,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">协助死亡</span><span class="tag">安乐死</span><span class="tag">家庭抉择</span><span class="tag">临终关怀</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7402,6 +7579,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">BBC News报道了一起关于协助死亡的英国家庭案例。Shelley Herniman的儿子Noah希望接受协助死亡，但最初母亲对此表示反对。然而，随着Noah病情恶化、痛苦加剧，Shelley的态度…</p>
@@ -7457,6 +7635,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普关税</span><span class="tag">最高法院裁决</span><span class="tag">全球贸易</span><span class="tag">State of the Union</span></span>
+            <div class="topic-actions">
             <span class="topic-count">7 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7464,6 +7643,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，美国最高法院裁定特朗普政府的单边关税政策违宪，这一重大司法裁决恰逢特朗普即将发表国情咨文演讲的前夕，形成了极具戏剧性的政治冲突。CNBC报道指出，该裁决使特朗普的关税战略陷入混乱…</p>
@@ -7564,6 +7744,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普</span><span class="tag">伊朗</span><span class="tag">军事打击</span><span class="tag">中东局势</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7571,6 +7752,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">该主题包含3篇相关报道，涵盖特朗普、伊朗、军事打击、中东局势等方面。</p>
@@ -7632,6 +7814,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">大疆</span><span class="tag">FCC</span><span class="tag">受管制清单</span><span class="tag">中美科技战</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7639,6 +7822,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月20日，全球民用无人机龙头企业大疆创新（DJI）正式向美国第九巡回上诉法院提起诉讼，挑战美国联邦通信委员会（FCC）于2025年12月23日将其列入&quot;受管制清单&quot;（Covered Lis…</p>
@@ -7694,6 +7878,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普外交</span><span class="tag">美欧关系</span><span class="tag">大使风波</span><span class="tag">欧盟对俄制裁</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7701,6 +7886,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">三篇文章共同揭示了特朗普第二任期外交政策对欧美关系的系统性冲击。FT报道称，法国因美国驻法大使查尔斯·库什纳（特朗普女婿贾里德·库什纳之父）无视外交部召见，已切断政府与其的接触渠道，这是极为罕见的外交…</p>
@@ -7765,6 +7951,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">中美科技战</span><span class="tag">台湾</span><span class="tag">苹果</span><span class="tag">CIA警告</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7772,6 +7959,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">《纽约时报》披露，2023年7月美国中情局在硅谷召开机密简报会，向苹果公司CEO蒂姆·库克等科技高管发出警告，称中国可能在2027年前对台湾采取军事行动。该会议由时任商务部长吉娜·雷蒙多推动安排，旨在…</p>
@@ -7818,6 +8006,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普司法部</span><span class="tag">反垄断</span><span class="tag">Ticketmaster</span><span class="tag">ICE执法</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7825,6 +8014,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇文章揭示了特朗普政府司法部在2026年2月同时推进的两条战线：一是反垄断领域的动荡与挑战，二是针对民主党州政府的移民执法诉讼。在反垄断方面，《The Verge》报道显示，司法部反垄断部门负责人…</p>
@@ -7880,6 +8070,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">俄乌战争</span><span class="tag">和平谈判</span><span class="tag">顿涅茨克</span><span class="tag">俄罗斯经济</span></span>
+            <div class="topic-actions">
             <span class="topic-count">3 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7887,6 +8078,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月，俄乌战争进入第四年，三篇文章从不同维度揭示了战争的深层影响与和平障碍。能源领域出现意外转折：普京试图以能源武器冻结乌克兰，反而刺激了后者的能源革命，加速其摆脱对俄依赖（r/techno…</p>
@@ -7952,6 +8144,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">特朗普心理状态</span><span class="tag">内阁</span><span class="tag">全球风险</span><span class="tag">政治不稳定</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -7959,6 +8152,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">《金融时报》于2026年2月24日发表文章，聚焦于特朗普的个人心理状态及其对全球稳定构成的威胁。文章核心论点是，特朗普本就反复无常的性格特质，在其组建了一个由谄媚者组成的内阁后，变得更加危险。该分析指…</p>
@@ -8005,6 +8199,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">加拿大</span><span class="tag">湾流飞机</span><span class="tag">特朗普关税</span><span class="tag">航空认证</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8012,6 +8207,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">加拿大航空监管机构在美国总统特朗普发出关税及报复措施威胁后，正式批准了剩余型号的湾流（Gulfstream）私人飞机认证。此前特朗普指责加拿大拒绝批准这些美国制造的公务机，并以此作为对加拿大实施贸易惩…</p>
@@ -8058,6 +8254,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">墨西哥</span><span class="tag">贩毒集团</span><span class="tag">特朗普</span><span class="tag">毒品战争</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8065,6 +8262,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">这两篇《纽约时报》文章共同揭示了墨西哥毒品战争在特朗普政府施压下的复杂困境，以及长达六十年的全球禁毒政策失效问题。第一篇文章聚焦于特朗普总统要求墨西哥总统克劳迪娅·辛鲍姆强硬打击贩毒集团的直接压力，并…</p>
@@ -8120,6 +8318,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">中日关系</span><span class="tag">出口管制</span><span class="tag">防务产业</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8127,6 +8326,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，中国宣布对20家与日本国防工业有关联的实体实施出口管制措施，标志着中日之间持续数月的争端进一步升级。据《纽约时报》报道，此次限制针对的是具有防务背景的日本企业，是北京方面加大对东…</p>
@@ -8173,6 +8373,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">FCC</span><span class="tag">FTC</span><span class="tag">言论自由</span><span class="tag">监管政治化</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8180,6 +8381,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据《纽约时报》2026年2月24日的报道，特朗普任命的官员已将联邦通信委员会（FCC）和联邦贸易委员会（FTC）这两个传统上独立的监管机构转变为意识形态执法工具，对美国的言论自由构成系统性威胁。这一…</p>
@@ -8226,6 +8428,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">英国政治</span><span class="tag">工党</span><span class="tag">曼德尔森</span><span class="tag">斯塔默</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8233,6 +8436,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">彼得·曼德尔森（Peter Mandelson）——英国前驻华盛顿大使、工党资深核心人物——于2026年2月24日被捕，这一事件进一步加剧了已持续发酵的政治丑闻。该丑闻已对英国首相基尔·斯塔默（Kei…</p>
@@ -8279,6 +8483,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">AI监管</span><span class="tag">Anthropic</span><span class="tag">政治广告</span><span class="tag">中期选举</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8286,6 +8491,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">Anthropic正在通过资助政治行动委员会Public First Action发起广告攻势，以推动人工智能监管立法。这一行动标志着AI企业在2026年中期选举前积极介入政治游说，试图影响未来AI监…</p>
@@ -8332,6 +8538,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">中国地方经济</span><span class="tag">新兴产业</span><span class="tag">强省会</span><span class="tag">区域发展</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8339,6 +8546,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年新春伊始，中国地方政府密集召开&quot;新春第一会&quot;，释放新一轮区域发展与产业政策信号。36氪报道显示，湖北省将加快建成中部地区崛起重要战略支点，重点布局集成电路、工业母机、具身智能等新兴产业和未来…</p>
@@ -8394,6 +8602,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">SHEIN</span><span class="tag">许仰天</span><span class="tag">快时尚</span><span class="tag">中美关系</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8401,6 +8610,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">据《金融时报》2026年2月24日报道，快时尚巨头SHEIN创始人许仰天（Xu Yangtian）罕见地从幕后走向台前，公开强调其中国根源，并特别指出中国共产党及地方政府的支持对SHEIN的发展至关重…</p>
@@ -8447,6 +8657,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">纽约政治</span><span class="tag">马姆达尼</span><span class="tag">民主党内部斗争</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8454,6 +8665,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">纽约市长佐赫兰·马姆达尼（Zohran Mamdani）正面临严峻的政治困境，来自两个不同方向的压力同时显现。一方面，曾在选举中败给他的政治对手——纽约市的富裕阶层和权势精英——正在积极谋划政治回归，…</p>
@@ -8509,6 +8721,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">英国教育</span><span class="tag">学生贷款</span><span class="tag">政策改革</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8516,6 +8729,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">英国教育大臣布里奇特·菲利普森（Bridget Phillipson）为政府提高学生贷款还款额的政策进行辩护，称平均每月还款额仅增加8英镑。然而，这一政策调整引发了英格兰部分毕业生的强烈不满，有毕业生…</p>
@@ -8562,6 +8776,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">教育科技</span><span class="tag">学校投资</span><span class="tag">数字教育</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8569,6 +8784,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">该主题聚焦于美国教育系统在课堂技术设备上的大规模投资及其效果争议。核心文章指出，尽管过去多年间美国学校投入了高达300亿美元用于购置笔记本电脑等科技设备，旨在推动教育现代化和数字化学习，但这一&quot;笔记本…</p>
@@ -8625,6 +8841,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">俄乌战争</span><span class="tag">乌克兰</span><span class="tag">俄罗斯</span><span class="tag">军事冲突</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8632,6 +8849,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日标志着俄罗斯全面入侵乌克兰四周年，BBC News发布的两篇报道从不同维度审视了这场持久冲突的现状。第一篇文章聚焦乌克兰的心理韧性与政治立场，指出尽管经历了四年艰苦战争，乌克兰依然…</p>
@@ -8687,6 +8905,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">暴雪</span><span class="tag">纽约</span><span class="tag">极端天气</span><span class="tag">交通中断</span></span>
+            <div class="topic-actions">
             <span class="topic-count">2 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8694,6 +8913,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月24日，美国东北部遭遇了一场破纪录的暴雪灾害，造成广泛影响。据《纽约时报》报道，这场风暴在高峰期导致超过50万户家庭和企业断电，显示出其严重的破坏力。纽约市作为受影响的核心地区，采取了差…</p>
@@ -8749,6 +8969,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">刘强东</span><span class="tag">京东</span><span class="tag">游艇</span><span class="tag">Sea Expandary</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8756,6 +8977,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">京东创始人刘强东宣布以个人身份投资50亿元人民币，创立独立游艇品牌&quot;Sea Expandary&quot;，正式进军游艇产业。该项目完全为个人投资，与京东业务分离，将由专门CEO负责管理，刘强东本人仍将主要精力…</p>
@@ -8803,6 +9025,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">贵州茅台</span><span class="tag">毕节</span><span class="tag">销售公司</span><span class="tag">白酒</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8810,6 +9033,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">2026年2月，贵州茅台在贵州省毕节市成立新的销售子公司，引发市场关注。据36氪报道，毕节茅台酒销售有限公司于2月13日正式注册成立，法定代表人为李强清，注册资本3000万元人民币。该公司由贵州茅台（…</p>
@@ -8856,6 +9080,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">福特号航母</span><span class="tag">美国海军</span><span class="tag">航母故障</span><span class="tag">军事装备</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8863,6 +9088,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">美国海军造价最高的&quot;杰拉尔德·R·福特&quot;号航空母舰遭遇严重厕所故障，舰上污水处理系统持续失灵，约80%的厕所一度无法正常使用，甚至出现污水倒灌的恶劣情况。故障发生时，该航母正停靠于希腊克里特岛苏达湾北…</p>
@@ -8911,6 +9137,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
           </div>
           <div class="topic-meta">
             <span class="topic-tags"><span class="tag">Paramount</span><span class="tag">Warner Bros</span><span class="tag">Netflix</span><span class="tag">媒体并购</span></span>
+            <div class="topic-actions">
             <span class="topic-count">1 篇报道</span>
             <button type="button" class="copy-prompt-btn" data-copy-prompt="true" aria-label="拷贝该聚合提问提示词" title="拷贝该聚合提问提示词">
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -8918,6 +9145,7 @@ After selling their popular weather app to Apple in March 2020, ...</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+            </div>
           </div>
           <div class="topic-preview">
             <p class="preview-text">根据《纽约时报》2026年2月24日的报道，Paramount已修订其对华纳兄弟探索（Warner Bros. Discovery）的竞购方案，标志着这场涉及好莱坞传统巨头的重大并购交易进入关键阶段。…</p>
