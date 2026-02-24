@@ -222,7 +222,10 @@
       letter-spacing: 0.02em;
     }
 
-    .brief-ticker {
+    .brief-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       border-top: 1px solid var(--tn-gray-300);
       border-bottom: 1px solid var(--tn-gray-300);
       background: var(--tn-gray-100);
@@ -230,65 +233,46 @@
       overflow: hidden;
     }
 
-    .brief-ticker-track {
-      display: flex;
-      align-items: center;
-      width: max-content;
-      min-width: 100%;
-      white-space: nowrap;
-      animation: briefTickerScroll 48s linear infinite;
+    .brief-item {
+      border-top: 1px solid var(--tn-gray-300);
     }
 
-    .brief-ticker:hover .brief-ticker-track {
-      animation-play-state: paused;
+    .brief-item:first-child {
+      border-top: none;
     }
 
     .brief-link {
+      display: block;
       text-decoration: none;
       color: inherit;
+      padding: 9px 10px;
+      line-height: 1.55;
     }
 
-    .brief-ticker-item {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      padding: 11px 16px 11px 0;
-      margin-left: 14px;
-      border-right: 1px solid var(--tn-gray-300);
-      flex: 0 0 auto;
-      line-height: 1.75;
+    .brief-link:hover {
+      background: #fff;
     }
 
-    .brief-ticker-title {
+    .brief-item-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brief-item-title {
       font-size: 14px;
       font-weight: 600;
       color: var(--tn-gray-900);
-      line-height: 1.75;
+      line-height: 1.55;
+      word-break: break-word;
     }
 
-    .brief-ticker-divider {
-      font-size: 13px;
-      color: var(--tn-gray-400);
-      line-height: 1.75;
-    }
-
-    .brief-ticker-summary {
+    .brief-item-summary {
       font-size: 13px;
       color: var(--tn-gray-600);
-      line-height: 1.75;
-    }
-
-    .brief-ticker-item:hover {
-      color: var(--tn-blue);
-    }
-
-    @keyframes briefTickerScroll {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
+      line-height: 1.6;
+      word-break: break-word;
     }
 
     .brief-audio {
@@ -1278,18 +1262,8 @@
         font-size: 18px;
       }
 
-      .brief-ticker {
-        overflow-x: auto;
-      }
-
-      .brief-ticker-track {
-        animation: none;
-        min-width: max-content;
-      }
-
-      .brief-ticker-item {
-        margin-left: 10px;
-        padding: 10px 12px 10px 0;
+      .brief-link {
+        padding: 10px 10px;
       }
 
       .stat-value {
@@ -1452,11 +1426,11 @@
         padding: 12px 10px;
       }
 
-      .brief-ticker-title {
+      .brief-item-title {
         font-size: 13px;
       }
 
-      .brief-ticker-summary {
+      .brief-item-summary {
         font-size: 12px;
       }
 
@@ -1950,26 +1924,16 @@
         <h2>今日简报</h2>
         <span class="daily-brief-count">8 条重点新闻</span>
       </div>
-      <div class="brief-ticker" aria-label="新闻快讯">
-        <div class="brief-ticker-track">
-          <a href="#topic-anchor-ai-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Anthropic指控三家中国AI公司窃密</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">Anthropic公开指控DeepSeek、月之暗面和MiniMax大规模窃取Claude模型数据。</span></a>
-          <a href="#topic-anchor-semiconductors-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Meta与AMD签署百亿美元芯片协议</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">Meta与AMD达成五年期合作，AMD将供应价值600亿至1000亿美元AI芯片。</span></a>
-          <a href="#topic-anchor-gaming-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Xbox高层地震：斯宾塞退休</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">微软游戏业务重大人事变动，斯宾塞退休，AI背景新CEO接任引发行业震荡。</span></a>
-          <a href="#topic-anchor-fintech-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">比特币暴跌创2022年来最差月表现</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">加密货币市场遭遇严重抛售，比特币迈向2022年6月以来最糟糕的月度表现。</span></a>
-          <a href="#topic-anchor-policy-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">美最高法院裁定特朗普关税违宪</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">最高法院裁定特朗普单边关税政策违宪，恰逢国情咨文演讲前夕形成政治冲突。</span></a>
-          <a href="#topic-anchor-consumer-electronics-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">苹果将部分Mac Mini产线迁美</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">苹果计划2026年将部分Mac Mini生产转移至美国，回应特朗普国内投资政策。</span></a>
-          <a href="#topic-anchor-ev-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">特斯拉起诉加州DMV挑战命名禁令</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">特斯拉正式起诉加州机动车辆管理局，挑战禁用Autopilot和FSD名称的规定。</span></a>
-          <a href="#topic-anchor-fintech-topic-1" class="brief-link brief-ticker-item"><span class="brief-ticker-title">AI负面评估引发科技股抛售</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">人工智能经济影响的负面评估引发全球科技股动荡，投资者转向实物资产避险。</span></a>
-          <a href="#topic-anchor-ai-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Anthropic指控三家中国AI公司窃密</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">Anthropic公开指控DeepSeek、月之暗面和MiniMax大规模窃取Claude模型数据。</span></a>
-          <a href="#topic-anchor-semiconductors-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Meta与AMD签署百亿美元芯片协议</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">Meta与AMD达成五年期合作，AMD将供应价值600亿至1000亿美元AI芯片。</span></a>
-          <a href="#topic-anchor-gaming-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">Xbox高层地震：斯宾塞退休</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">微软游戏业务重大人事变动，斯宾塞退休，AI背景新CEO接任引发行业震荡。</span></a>
-          <a href="#topic-anchor-fintech-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">比特币暴跌创2022年来最差月表现</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">加密货币市场遭遇严重抛售，比特币迈向2022年6月以来最糟糕的月度表现。</span></a>
-          <a href="#topic-anchor-policy-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">美最高法院裁定特朗普关税违宪</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">最高法院裁定特朗普单边关税政策违宪，恰逢国情咨文演讲前夕形成政治冲突。</span></a>
-          <a href="#topic-anchor-consumer-electronics-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">苹果将部分Mac Mini产线迁美</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">苹果计划2026年将部分Mac Mini生产转移至美国，回应特朗普国内投资政策。</span></a>
-          <a href="#topic-anchor-ev-topic-0" class="brief-link brief-ticker-item"><span class="brief-ticker-title">特斯拉起诉加州DMV挑战命名禁令</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">特斯拉正式起诉加州机动车辆管理局，挑战禁用Autopilot和FSD名称的规定。</span></a>
-          <a href="#topic-anchor-fintech-topic-1" class="brief-link brief-ticker-item"><span class="brief-ticker-title">AI负面评估引发科技股抛售</span><span class="brief-ticker-divider">·</span><span class="brief-ticker-summary">人工智能经济影响的负面评估引发全球科技股动荡，投资者转向实物资产避险。</span></a>
-        </div>
-      </div>
+      <ul class="brief-list" aria-label="新闻快讯">
+        <li class="brief-item"><a href="#topic-anchor-ai-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">Anthropic指控三家中国AI公司窃密</span><span class="brief-item-summary">Anthropic公开指控DeepSeek、月之暗面和MiniMax大规模窃取Claude模型数据。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-semiconductors-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">Meta与AMD签署百亿美元芯片协议</span><span class="brief-item-summary">Meta与AMD达成五年期合作，AMD将供应价值600亿至1000亿美元AI芯片。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-gaming-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">Xbox高层地震：斯宾塞退休</span><span class="brief-item-summary">微软游戏业务重大人事变动，斯宾塞退休，AI背景新CEO接任引发行业震荡。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-fintech-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">比特币暴跌创2022年来最差月表现</span><span class="brief-item-summary">加密货币市场遭遇严重抛售，比特币迈向2022年6月以来最糟糕的月度表现。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-policy-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">美最高法院裁定特朗普关税违宪</span><span class="brief-item-summary">最高法院裁定特朗普单边关税政策违宪，恰逢国情咨文演讲前夕形成政治冲突。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-consumer-electronics-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">苹果将部分Mac Mini产线迁美</span><span class="brief-item-summary">苹果计划2026年将部分Mac Mini生产转移至美国，回应特朗普国内投资政策。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-ev-topic-0" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">特斯拉起诉加州DMV挑战命名禁令</span><span class="brief-item-summary">特斯拉正式起诉加州机动车辆管理局，挑战禁用Autopilot和FSD名称的规定。</span></span></a></li>
+        <li class="brief-item"><a href="#topic-anchor-fintech-topic-1" class="brief-link"><span class="brief-item-body"><span class="brief-item-title">AI负面评估引发科技股抛售</span><span class="brief-item-summary">人工智能经济影响的负面评估引发全球科技股动荡，投资者转向实物资产避险。</span></span></a></li>
+      </ul>
       <div class="brief-audio">
         <audio id="dailyBriefAudio" controls preload="none">
           <source src="digest-2026-02-24-brief.m4a" type="audio/mp4">
