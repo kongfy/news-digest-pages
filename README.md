@@ -3,6 +3,6 @@
 Auto-published static news digest.
 
 - Latest digest: [index.html](./index.html)
-- Latest snapshot: [digest-2026-02-27.html](./digest-2026-02-27.html)
+- Latest snapshot: [digest-2026-02-28.html](./digest-2026-02-28.html)
 - Archive manifest: [archive.json](./archive.json)
-- Updated at: 2026-02-27 09:26:05 +0800
+- Updated at: 2026-02-28 08:47:02 +0800
