@@ -884,7 +884,8 @@
       letter-spacing: 0.06em;
     }
 
-    .copy-prompt-btn {
+    .copy-prompt-btn,
+    .share-topic-btn {
       margin-left: 0;
       max-width: 100%;
       width: 32px;
@@ -901,22 +902,26 @@
       transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
     }
 
-    .copy-prompt-btn:hover {
+    .copy-prompt-btn:hover,
+    .share-topic-btn:hover {
       background: var(--tn-gray-100);
       border-color: #d1d5db;
       color: var(--tn-gray-900);
     }
 
-    .copy-prompt-btn:active {
+    .copy-prompt-btn:active,
+    .share-topic-btn:active {
       transform: translateY(1px);
     }
 
-    .copy-prompt-btn:focus-visible {
+    .copy-prompt-btn:focus-visible,
+    .share-topic-btn:focus-visible {
       outline: 2px solid var(--tn-blue);
       outline-offset: 2px;
     }
 
-    .copy-prompt-icon {
+    .copy-prompt-icon,
+    .share-topic-icon {
       width: 16px;
       height: 16px;
       fill: none;
@@ -933,6 +938,18 @@
     }
 
     .copy-prompt-btn.copy-failed {
+      background: var(--tn-red-bg);
+      border-color: #fecaca;
+      color: var(--tn-red-text);
+    }
+
+    .share-topic-btn.shared {
+      background: var(--tn-green-bg);
+      border-color: #86efac;
+      color: var(--tn-green-text);
+    }
+
+    .share-topic-btn.share-failed {
       background: var(--tn-red-bg);
       border-color: #fecaca;
       color: var(--tn-red-text);
@@ -1885,6 +1902,7 @@
       const newsToggle = document.getElementById('newsToggle');
       const newsSubNav = document.getElementById('newsSubNav');
       const copyPromptButtons = document.querySelectorAll('.copy-prompt-btn[data-copy-prompt="true"]');
+      const shareTopicButtons = document.querySelectorAll('.share-topic-btn[data-share-topic="true"]');
       const briefAudioRoot = document.querySelector('[data-audio-player-root]');
       const dailyBriefAudio = document.getElementById('dailyBriefAudio');
       const customBriefPlayer = document.querySelector('[data-audio-player]');
@@ -2050,7 +2068,7 @@
         syncBriefTimeline();
       }
 
-      function extractTopicPromptData(card) {
+      function extractTopicTitle(card) {
         const topicNameElement = card.querySelector('.topic-name');
         let topicName = '未命名主题';
         if (topicNameElement) {
@@ -2058,6 +2076,38 @@
           nameClone.querySelectorAll('.podcast-badge').forEach((badge) => badge.remove());
           topicName = (nameClone.textContent || '').trim() || topicName;
         }
+        return topicName;
+      }
+
+      function resolveFixedDigestFileName() {
+        const digestCalendarToggle = document.getElementById('digestCalendarToggle');
+        const currentDate = (digestCalendarToggle?.dataset.currentDate || '').trim();
+        if (/^\d{4}-\d{2}-\d{2}$/.test(currentDate)) {
+          return 'digest-' + currentDate + '.html';
+        }
+
+        const currentFile = (digestCalendarToggle?.dataset.currentFile || '').trim();
+        if (currentFile) {
+          return currentFile;
+        }
+
+        const pathFile = (window.location.pathname.split('/').pop() || '').trim();
+        return pathFile || 'index.html';
+      }
+
+      function buildTopicShareUrl(card) {
+        const digestFile = resolveFixedDigestFileName();
+        const topicAnchor = (card.id || '').trim();
+        const digestPath = topicAnchor ? digestFile + '#' + topicAnchor : digestFile;
+        return new URL(digestPath, window.location.href).href;
+      }
+
+      function buildTopicShareText(title, url) {
+        return title + '\n' + url;
+      }
+
+      function extractTopicPromptData(card) {
+        const topicName = extractTopicTitle(card);
 
         const summarySelectors = ['.cluster-summary > p', '.article-summary p', '.preview-text'];
         let summary = '';
@@ -2138,17 +2188,25 @@
         }
       }
 
-      function setCopyButtonFeedback(button, className) {
-        button.classList.remove('copied', 'copy-failed');
-        if (className) {
-          button.classList.add(className);
+      function setButtonFeedback(button, stateClasses, activeClass) {
+        stateClasses.forEach((name) => button.classList.remove(name));
+        if (activeClass) {
+          button.classList.add(activeClass);
         }
         button.disabled = true;
 
         window.setTimeout(() => {
-          button.classList.remove('copied', 'copy-failed');
+          stateClasses.forEach((name) => button.classList.remove(name));
           button.disabled = false;
         }, 1500);
+      }
+
+      function setCopyButtonFeedback(button, className) {
+        setButtonFeedback(button, ['copied', 'copy-failed'], className);
+      }
+
+      function setShareButtonFeedback(button, className) {
+        setButtonFeedback(button, ['shared', 'share-failed'], className);
       }
 
       copyPromptButtons.forEach((button) => {
@@ -2168,6 +2226,37 @@
             setCopyButtonFeedback(button, 'copied');
           } catch {
             setCopyButtonFeedback(button, 'copy-failed');
+          }
+        });
+      });
+
+      shareTopicButtons.forEach((button) => {
+        button.addEventListener('click', async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const card = button.closest('.topic-card');
+          if (!card) return;
+
+          const title = extractTopicTitle(card);
+          const url = buildTopicShareUrl(card);
+          const text = buildTopicShareText(title, url);
+
+          if (typeof navigator.share === 'function') {
+            try {
+              await navigator.share({ title, text, url });
+              setShareButtonFeedback(button, 'shared');
+              return;
+            } catch {
+              // Fall back to clipboard when share is unavailable, denied, or canceled.
+            }
+          }
+
+          try {
+            const copied = await copyText(text);
+            setShareButtonFeedback(button, copied ? 'shared' : 'share-failed');
+          } catch {
+            setShareButtonFeedback(button, 'share-failed');
           }
         });
       });
@@ -2358,12 +2447,12 @@
       document.querySelectorAll('.topic-header').forEach(header => {
         header.addEventListener('click', (e) => {
           if (!mobileQuery.matches) return;
-          if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('button')) return;
+          if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('.share-topic-btn') || e.target.closest('button')) return;
           toggleCard(header.closest('.topic-card'));
         });
         header.addEventListener('keydown', (e) => {
           if (!mobileQuery.matches) return;
-          if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('button')) return;
+          if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('.share-topic-btn') || e.target.closest('button')) return;
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             toggleCard(header.closest('.topic-card'));
@@ -2466,8 +2555,12 @@
           return 'digest-' + dateValue + '.html';
         }
 
-        function updateArchiveStatus() {
-          digestCalendarStatus.textContent = hasArchiveData ? '' : '归档暂不可用，当前仅展示本页日期';
+        function updateArchiveStatus(message) {
+          if (message) {
+            digestCalendarStatus.textContent = message;
+          } else {
+            digestCalendarStatus.textContent = hasArchiveData ? '' : '归档暂不可用，当前仅展示本页日期';
+          }
         }
 
         function openDigestCalendar() {
@@ -2578,47 +2671,25 @@
           }
         });
 
+        // Embedded archive data - DIRECT FIX - set dates directly without helper functions
+        const archiveDates = [
+          "2026-03-01", "2026-02-28", "2026-02-27", "2026-02-26", "2026-02-25",
+          "2026-02-24", "2026-02-23", "2026-02-22", "2026-02-21", "2026-02-20",
+          "2026-02-19", "2026-02-18", "2026-02-16"
+        ];
+        
+        // Directly populate availableDateMap
+        archiveDates.forEach(date => {
+          availableDateMap.set(date, 'digest-' + date + '.html');
+        });
+        hasArchiveData = archiveDates.length > 0;
+        
+        // Adjust view to February (earliest archive month)
+        viewYear = 2026;
+        viewMonth = 1; // February (0-indexed)
+        
         renderDigestCalendar();
         updateArchiveStatus();
-
-        fetch('archive.json', { cache: 'no-store' })
-          .then((resp) => (resp.ok ? resp.json() : null))
-          .then((archiveData) => {
-            const items = Array.isArray(archiveData)
-              ? archiveData
-              : (archiveData && Array.isArray(archiveData.items) ? archiveData.items : []);
-            if (!items.length) {
-              hasArchiveData = false;
-              renderDigestCalendar();
-              updateArchiveStatus();
-              return;
-            }
-
-            hasArchiveData = false;
-            items.forEach((item) => {
-              const dateValue = getArchiveDateValue(item);
-              if (!dateValue) return;
-              const parsedDate = parseDateString(dateValue);
-              if (!parsedDate) return;
-              availableDateMap.set(dateValue, getArchiveFileName(item, dateValue));
-              hasArchiveData = true;
-            });
-
-            const firstArchiveDate = getArchiveDateValue(items[0]);
-            const firstArchiveDateObj = parseDateString(firstArchiveDate);
-            if (!currentDigestDate && firstArchiveDateObj) {
-              viewYear = firstArchiveDateObj.getFullYear();
-              viewMonth = firstArchiveDateObj.getMonth();
-            }
-
-            renderDigestCalendar();
-            updateArchiveStatus();
-          })
-          .catch(() => {
-            hasArchiveData = false;
-            renderDigestCalendar();
-            updateArchiveStatus();
-          });
 
         const weekdayRow = document.getElementById('digestCalendarWeekdays');
         if (weekdayRow) {
@@ -2924,6 +2995,14 @@
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -2991,6 +3070,14 @@
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3067,6 +3154,14 @@
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3253,6 +3348,14 @@ President Donald J. Trump and the White House posted on social media ordering al
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3365,6 +3468,14 @@ President Donald J. Trump and the White House posted on social media ordering al
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3418,6 +3529,14 @@ President Donald J. Trump and the White House posted on social media ordering al
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3491,6 +3610,14 @@ President Donald J. Trump and the White House posted on social media ordering al
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3581,6 +3708,14 @@ President Donald J. Trump and the White House posted on social media ordering al
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3642,6 +3777,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3706,6 +3849,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3767,6 +3918,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3825,6 +3984,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -3898,6 +4065,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -3952,6 +4127,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4017,6 +4200,14 @@ DRAMeXchange的母公司TrendForce宣布，今年第一季度，PC DRAM价格较
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4164,6 +4355,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4237,6 +4436,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4298,6 +4505,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4351,6 +4566,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4424,6 +4647,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4488,6 +4719,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4547,6 +4786,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4614,6 +4861,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4676,6 +4931,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4741,6 +5004,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4822,6 +5093,14 @@ Xiaomi’s 17 series is launching across multiple European territories months af
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -4885,6 +5164,14 @@ This is a coin-pushing roguelike deckbuilder that adopts the format of Balatro. 
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -4960,6 +5247,14 @@ As Bloomberg reported, Bluepoint pitched a Bloodborne remake after several years
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5051,6 +5346,14 @@ As Bloomberg reported, Bluepoint pitched a Bloodborne remake after several years
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5173,6 +5476,14 @@ As Bloomberg reported, Bluepoint pitched a Bloodborne remake after several years
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -5248,6 +5559,14 @@ In a statement posted on its </p>
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5332,6 +5651,14 @@ In a statement posted on its </p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -5394,6 +5721,14 @@ In a statement posted on its </p>
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5469,6 +5804,14 @@ In a statement posted on its </p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -5534,6 +5877,14 @@ The observatory released the first image</p>
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5607,6 +5958,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5700,6 +6059,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -5753,6 +6120,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5826,6 +6201,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5909,6 +6292,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -5997,6 +6388,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -6072,6 +6471,14 @@ porosus）的最西端种群，这一结果为一个悬而未决达250年的自�
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -6338,6 +6745,14 @@ Joumanna Bercetche explains. (Source: Bloomberg)</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -6412,6 +6827,14 @@ Joumanna Bercetche explains. (Source: Bloomberg)</p>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
             </svg>
           </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
+            </svg>
+          </button>
             </div>
           </div>
           <div class="topic-preview">
@@ -6465,6 +6888,14 @@ Joumanna Bercetche explains. (Source: Bloomberg)</p>
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -6531,6 +6962,14 @@ The bill&#039;s original form was focused on prohibiting the possession and dist
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
@@ -6604,6 +7043,14 @@ The bill&#039;s original form was focused on prohibiting the possession and dist
             <svg class="copy-prompt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="9" y="9" width="10" height="10" rx="2"></rect>
               <rect x="5" y="5" width="10" height="10" rx="2"></rect>
+            </svg>
+          </button>
+              <button type="button" class="share-topic-btn" data-share-topic="true" aria-label="分享该聚合" title="分享该聚合">
+            <svg class="share-topic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 12h9"></path>
+              <path d="M13 7l5 5-5 5"></path>
+              <path d="M6 5h6a2 2 0 0 1 2 2v2"></path>
+              <path d="M14 15v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"></path>
             </svg>
           </button>
             </div>
