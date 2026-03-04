@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDigestCalendar();
 
     // 直接嵌入归档日期列表（生成时按日期从新到旧排序）
-    const archiveDates = window._digestArchiveDates || [];
+    const archiveDates = Array.isArray(window._digestArchiveDates) ? window._digestArchiveDates : [];
 
     archiveDates.forEach((date) => {
       availableDateMap.set(date, 'digest-' + date + '.html');
@@ -801,3 +801,6 @@ document.addEventListener('DOMContentLoaded', () => {
       weekdayRow.innerHTML = weekdayLabels
         .map((label) => '<span class="digest-calendar-weekday" aria-hidden="true">' + label + '</span>')
         .join('');
+    }
+  }
+});
