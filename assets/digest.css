@@ -354,19 +354,13 @@
     border-bottom: 1px solid var(--tn-gray-300);
     background: var(--tn-gray-100);
     border-radius: 6px;
-    overflow: hidden;
-    max-height: 160px;
+    overflow-y: auto;
+    max-height: 220px;
   }
 
   .brief-roll-track {
     display: flex;
     flex-direction: column;
-    animation: briefRollVertical 46s linear infinite;
-    will-change: transform;
-  }
-
-  .brief-roll:hover .brief-roll-track {
-    animation-play-state: paused;
   }
 
   .brief-link {
@@ -403,15 +397,6 @@
     line-height: 1.65;
     word-break: break-word;
     display: block;
-  }
-
-  @keyframes briefRollVertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(-50%);
-    }
   }
 
   .brief-audio {
@@ -952,6 +937,33 @@
     background: var(--tn-red-bg);
     border-color: #fecaca;
     color: var(--tn-red-text);
+  }
+
+  .digest-action-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translate(-50%, 10px);
+    background: #111827;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(17, 24, 39, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .digest-action-toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .digest-action-toast.is-error {
+    background: #991b1b;
   }
 
   .collapse-chevron {

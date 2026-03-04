@@ -16,6 +16,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const briefBuffered = customBriefPlayer ? customBriefPlayer.querySelector('[data-audio-buffered]') : null;
   const briefRateSelect = customBriefPlayer ? customBriefPlayer.querySelector('[data-audio-rate]') : null;
 
+  const briefRollTrack = document.querySelector('.brief-roll-track');
+  if (briefRollTrack) {
+    const rollItems = Array.from(briefRollTrack.children).filter((node) =>
+      node instanceof HTMLElement && node.classList.contains('brief-roll-item')
+    );
+    if (rollItems.length > 1 && rollItems.length % 2 === 0) {
+      const half = rollItems.length / 2;
+      let duplicated = true;
+      for (let i = 0; i < half; i += 1) {
+        const left = rollItems[i];
+        const right = rollItems[i + half];
+        if (!(left instanceof HTMLAnchorElement) || !(right instanceof HTMLAnchorElement)) {
+          duplicated = false;
+          break;
+        }
+        if (left.getAttribute('href') !== right.getAttribute('href') || (left.textContent || '').trim() !== (right.textContent || '').trim()) {
+          duplicated = false;
+          break;
+        }
+      }
+      if (duplicated) {
+        for (let i = half; i < rollItems.length; i += 1) {
+          rollItems[i].remove();
+        }
+      }
+    }
+  }
+
   if (
     briefAudioRoot &&
     dailyBriefAudio &&
@@ -31,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     briefAudioRoot.classList.add('enhanced');
     customBriefPlayer.hidden = false;
     dailyBriefAudio.controls = false;
+
+    const fallbackDurationText = (briefDuration.textContent || '--:--').trim();
+    const fallbackDurationLabel = fallbackDurationText === '--:--' ? '加载中' : (fallbackDurationText || '--:--');
 
     function formatBriefAudioTime(seconds) {
       if (!Number.isFinite(seconds) || seconds < 0) {
@@ -87,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const duration = Number.isFinite(dailyBriefAudio.duration) ? dailyBriefAudio.duration : 0;
       const currentTime = Number.isFinite(dailyBriefAudio.currentTime) ? dailyBriefAudio.currentTime : 0;
       briefCurrentTime.textContent = formatBriefAudioTime(currentTime);
-      briefDuration.textContent = duration > 0 ? formatBriefAudioTime(duration) : '--:--';
+      briefDuration.textContent = duration > 0 ? formatBriefAudioTime(duration) : fallbackDurationLabel;
       briefProgress.value = duration > 0 ? String(Math.round((currentTime / duration) * 1000)) : '0';
       syncBriefProgressVisual(currentTime, duration);
     }
@@ -164,6 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultRate = String(dailyBriefAudio.playbackRate || 1);
     if (Array.from(briefRateSelect.options).some((option) => option.value === defaultRate)) {
       briefRateSelect.value = defaultRate;
+    }
+    if (dailyBriefAudio.readyState === 0 && dailyBriefAudio.preload !== 'none') {
+      dailyBriefAudio.load();
     }
     setBriefPlayState(!dailyBriefAudio.paused);
     syncBriefTimeline();
@@ -289,6 +323,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const actionToast = document.createElement('div');
+  actionToast.className = 'digest-action-toast';
+  actionToast.setAttribute('role', 'status');
+  actionToast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(actionToast);
+  let actionToastTimer = null;
+
+  function showActionToast(message, kind = 'success') {
+    actionToast.textContent = message;
+    actionToast.classList.remove('is-error', 'is-visible');
+    if (kind === 'error') {
+      actionToast.classList.add('is-error');
+    }
+
+    window.requestAnimationFrame(() => {
+      actionToast.classList.add('is-visible');
+    });
+
+    if (actionToastTimer) {
+      window.clearTimeout(actionToastTimer);
+    }
+
+    actionToastTimer = window.setTimeout(() => {
+      actionToast.classList.remove('is-visible');
+    }, 1500);
+  }
+
   function setButtonFeedback(button, stateClasses, activeClass) {
     stateClasses.forEach((name) => button.classList.remove(name));
     if (activeClass) {
@@ -322,11 +383,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const copied = await copyText(promptText);
         if (!copied) {
           setCopyButtonFeedback(button, 'copy-failed');
+          showActionToast('复制失败，请重试', 'error');
           return;
         }
         setCopyButtonFeedback(button, 'copied');
+        showActionToast('提示词已复制');
       } catch {
         setCopyButtonFeedback(button, 'copy-failed');
+        showActionToast('复制失败，请重试', 'error');
       }
     });
   });
@@ -349,6 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Sending a single text payload keeps it as one message while preserving the link.
           await navigator.share({ text });
           setShareButtonFeedback(button, 'shared');
+          showActionToast('已打开系统分享');
           return;
         } catch {
           // Fall back to clipboard when share is unavailable, denied, or canceled.
@@ -358,8 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const copied = await copyText(text);
         setShareButtonFeedback(button, copied ? 'shared' : 'share-failed');
+        showActionToast(copied ? '分享链接已复制' : '分享失败，请重试', copied ? 'success' : 'error');
       } catch {
         setShareButtonFeedback(button, 'share-failed');
+        showActionToast('分享失败，请重试', 'error');
       }
     });
   });
