@@ -580,48 +580,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // Collapsible topic cards (mobile only)
   const mobileQuery = window.matchMedia('(max-width: 768px)');
 
+  function syncCardExpandedState(card) {
+    const header = card.querySelector('.topic-header');
+    if (header) header.setAttribute('aria-expanded', card.classList.contains('collapsed') ? 'false' : 'true');
+  }
+
   function initCollapsibleCards() {
-    const cards = document.querySelectorAll('.topic-card');
-    if (mobileQuery.matches) {
-      // Mobile: collapse all, then expand first analyzed card per category
-      cards.forEach(card => {
-        card.classList.add('collapsed');
-        const header = card.querySelector('.topic-header');
-        if (header) header.setAttribute('aria-expanded', 'false');
-      });
-      document.querySelectorAll('.category-section').forEach(section => {
-        const firstAnalyzed = section.querySelector('.topic-card[data-has-analysis="true"]');
-        if (firstAnalyzed) {
-          firstAnalyzed.classList.remove('collapsed');
-          const h = firstAnalyzed.querySelector('.topic-header');
-          if (h) h.setAttribute('aria-expanded', 'true');
-        }
-      });
-    } else {
-      // Desktop: expand all
-      cards.forEach(card => {
-        card.classList.remove('collapsed');
-        const header = card.querySelector('.topic-header');
-        if (header) header.setAttribute('aria-expanded', 'true');
-      });
-    }
+    document.querySelectorAll('.topic-card').forEach(card => {
+      syncCardExpandedState(card);
+    });
   }
 
   function toggleCard(card) {
-    if (!mobileQuery.matches) return;
-    const isCollapsed = card.classList.toggle('collapsed');
-    const header = card.querySelector('.topic-header');
-    if (header) header.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+    if (!card) return;
+    card.classList.toggle('collapsed');
+    syncCardExpandedState(card);
   }
 
   document.querySelectorAll('.topic-header').forEach(header => {
     header.addEventListener('click', (e) => {
-      if (!mobileQuery.matches) return;
       if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('.share-topic-btn') || e.target.closest('button')) return;
       toggleCard(header.closest('.topic-card'));
     });
     header.addEventListener('keydown', (e) => {
-      if (!mobileQuery.matches) return;
       if (e.target.closest('a') || e.target.closest('.copy-prompt-btn') || e.target.closest('.share-topic-btn') || e.target.closest('button')) return;
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -631,7 +612,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   initCollapsibleCards();
-  mobileQuery.addEventListener('change', initCollapsibleCards);
 
   function scrollToTopicAnchor(targetId) {
     if (!targetId) return;
@@ -639,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!target) return;
 
     const card = target.classList.contains('topic-card') ? target : target.closest('.topic-card');
-    if (mobileQuery.matches && card && card.classList.contains('collapsed')) {
+    if (card && card.classList.contains('collapsed')) {
       card.classList.remove('collapsed');
       const header = card.querySelector('.topic-header');
       if (header) header.setAttribute('aria-expanded', 'true');
