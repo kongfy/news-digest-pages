@@ -326,6 +326,33 @@
     margin-bottom: 14px;
   }
 
+  .content-block {
+    margin-bottom: 20px;
+  }
+
+  .content-block-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .content-block-title {
+    font-size: clamp(24px, 3.4vw, 32px);
+    font-weight: 700;
+    color: var(--tn-gray-900);
+    line-height: 1.15;
+  }
+
+  .content-block-subtitle {
+    font-size: 12px;
+    color: var(--tn-gray-500);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
   .daily-brief-header {
     display: flex;
     align-items: baseline;
@@ -694,18 +721,18 @@
     flex-shrink: 0;
   }
 
-  .nav-news-toggle {
+  .nav-group-toggle {
     user-select: none;
   }
 
-  .nav-news-toggle::after {
+  .nav-group-toggle::after {
     content: '▾';
     font-size: 10px;
     margin-left: 4px;
     transition: transform 0.2s;
   }
 
-  .nav-news-toggle.collapsed::after {
+  .nav-group-toggle.collapsed::after {
     transform: rotate(-90deg);
   }
 

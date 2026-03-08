@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const navItems = document.querySelectorAll('.nav-item[data-section]');
-  const newsToggle = document.getElementById('newsToggle');
-  const newsSubNav = document.getElementById('newsSubNav');
+  const navGroupToggles = document.querySelectorAll('[data-nav-toggle]');
   const copyPromptButtons = document.querySelectorAll('.copy-prompt-btn[data-copy-prompt="true"]');
   const shareTopicButtons = document.querySelectorAll('.share-topic-btn[data-share-topic="true"]');
   const briefAudioRoot = document.querySelector('[data-audio-player-root]');
@@ -431,14 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // News sub-nav toggle (desktop)
-  if (newsToggle && newsSubNav) {
-    newsToggle.addEventListener('click', (e) => {
+  // Group sub-nav toggle (desktop)
+  navGroupToggles.forEach((toggle) => {
+    const targetId = toggle.getAttribute('data-nav-toggle');
+    if (!targetId) return;
+    const subNav = document.getElementById(targetId);
+    if (!subNav) return;
+
+    toggle.addEventListener('click', (e) => {
       e.preventDefault();
-      newsToggle.classList.toggle('collapsed');
-      newsSubNav.classList.toggle('collapsed');
+      toggle.classList.toggle('collapsed');
+      subNav.classList.toggle('collapsed');
     });
-  }
+  });
 
   // Desktop: click to scroll
   navItems.forEach(link => {
@@ -474,14 +478,17 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.remove('active');
       }
     });
-    if (newsToggle) {
-      const activeItem = document.querySelector('.nav-sub-item.active');
+    navGroupToggles.forEach((toggle) => {
+      const targetId = toggle.getAttribute('data-nav-toggle');
+      if (!targetId) return;
+      const subNav = document.getElementById(targetId);
+      const activeItem = subNav?.querySelector('.nav-sub-item.active');
       if (activeItem) {
-        newsToggle.classList.add('active');
+        toggle.classList.add('active');
       } else {
-        newsToggle.classList.remove('active');
+        toggle.classList.remove('active');
       }
-    }
+    });
     // Mobile sheet nav
     document.querySelectorAll('.sheet-item[data-section]').forEach(item => {
       if (activeId && item.getAttribute('data-section') === activeId) {
