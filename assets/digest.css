@@ -1607,7 +1607,7 @@
     overflow-y: auto;
     transform: translateY(100%);
     transition: transform 0.3s ease;
-    padding: 12px 0 calc(env(safe-area-inset-bottom, 0px) + 16px);
+    padding: 0 0 calc(env(safe-area-inset-bottom, 0px) + 16px);
     box-shadow: 0 -12px 24px rgba(17, 24, 39, 0.24);
     -webkit-overflow-scrolling: touch;
   }
@@ -1624,6 +1624,11 @@
     margin: 6px auto 14px;
   }
 
+  .mobile-sheet-header {
+    background: #fff;
+    border-radius: 14px 14px 0 0;
+  }
+
   .sheet-title {
     font-size: 12px;
     font-weight: 700;
@@ -1632,6 +1637,7 @@
     letter-spacing: 0.08em;
     padding: 0 16px 10px;
     border-bottom: 1px solid var(--tn-gray-300);
+    background: #fff;
   }
 
   .sheet-group-switcher {
@@ -1642,7 +1648,20 @@
     background: #fff;
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 3;
+  }
+
+  .sheet-group-switcher::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 40px;
+    background: #fff;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    pointer-events: none;
   }
 
   .sheet-group-tab {
