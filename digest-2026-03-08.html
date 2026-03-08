@@ -17,12 +17,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="./assets/digest.css?v=46496c78a556">
+  <link rel="stylesheet" href="./assets/digest.css?v=9a3203628975">
   <script>
     // Inject archive dates for external script
     window._digestArchiveDates = ["2026-03-07","2026-03-06","2026-03-05","2026-03-04","2026-03-03","2026-03-02","2026-03-01","2026-02-28","2026-02-27","2026-02-26","2026-02-25","2026-02-24","2026-02-23","2026-02-22","2026-02-21","2026-02-20","2026-02-19","2026-02-18","2026-02-16"];
   </script>
-  <script src="./assets/digest.js?v=46496c78a556"></script>
+  <script src="./assets/digest.js?v=9a3203628975"></script>
 </head>
 <body>
   <div class="tailnews-topbar">
@@ -68,33 +68,31 @@
     
 
     
-    <nav class="category-nav">
+    
+    <nav class="category-nav" data-default-nav-group="news">
       <div class="nav-container">
-        
-        <a href="#" class="nav-item nav-top-level nav-group-toggle" id="newsToggle" data-nav-toggle="newsSubNav">📰 新闻</a>
-        <div class="nav-sub-container" id="newsSubNav">
-          <a href="#ai" class="nav-item nav-sub-item" data-section="ai">AI &amp; 机器学习 <span class="nav-count">45</span></a>
-<a href="#semiconductors" class="nav-item nav-sub-item" data-section="semiconductors">半导体 &amp; 芯片 <span class="nav-count">2</span></a>
-<a href="#cloud" class="nav-item nav-sub-item" data-section="cloud">云计算 &amp; 企业软件 <span class="nav-count">3</span></a>
-<a href="#policy" class="nav-item nav-sub-item" data-section="policy">政治 &amp; 政策 <span class="nav-count">37</span></a>
-<a href="#fintech" class="nav-item nav-sub-item" data-section="fintech">金融市场 &amp; 金融科技 <span class="nav-count">22</span></a>
-<a href="#healthcare" class="nav-item nav-sub-item" data-section="healthcare">医疗健康 <span class="nav-count">1</span></a>
-<a href="#consumer-electronics" class="nav-item nav-sub-item" data-section="consumer-electronics">消费电子 <span class="nav-count">6</span></a>
-<a href="#ev" class="nav-item nav-sub-item" data-section="ev">电动汽车 &amp; 交通 <span class="nav-count">5</span></a>
-<a href="#security" class="nav-item nav-sub-item" data-section="security">网络安全 &amp; 隐私 <span class="nav-count">9</span></a>
-<a href="#space" class="nav-item nav-sub-item" data-section="space">航天航空 <span class="nav-count">4</span></a>
-<a href="#social" class="nav-item nav-sub-item" data-section="social">社交媒体 <span class="nav-count">2</span></a>
-<a href="#gaming" class="nav-item nav-sub-item" data-section="gaming">游戏 &amp; 娱乐 <span class="nav-count">4</span></a>
-<a href="#society" class="nav-item nav-sub-item" data-section="society">社会事件 &amp; 法治 <span class="nav-count">2</span></a>
-<a href="#lifestyle" class="nav-item nav-sub-item" data-section="lifestyle">生活方式 &amp; 文化 <span class="nav-count">6</span></a>
-<a href="#sports" class="nav-item nav-sub-item" data-section="sports">体育赛事 <span class="nav-count">3</span></a>
-<a href="#general" class="nav-item nav-sub-item" data-section="general">综合 <span class="nav-count">8</span></a>
+        <div class="nav-group-switcher" role="tablist" aria-label="内容分组导航">
+          <button type="button" class="nav-group-tab active" data-nav-group="news" role="tab" aria-selected="true" aria-controls="nav-panel-news">📰 新闻</button>
+          <button type="button" class="nav-group-tab" data-nav-group="subscription" role="tab" aria-selected="false" aria-controls="nav-panel-subscription">📮 订阅消息</button>
         </div>
-        <span class="nav-divider"></span>
-        
-        <a href="#" class="nav-item nav-top-level nav-group-toggle" id="subscriptionToggle" data-nav-toggle="subscriptionSubNav">📮 订阅消息</a>
-        <div class="nav-sub-container" id="subscriptionSubNav">
-          <a href="#podcasts" class="nav-item nav-sub-item" data-section="podcasts">🎙️ 播客 <span class="nav-count">2</span></a>
+        <div class="nav-sub-panels">
+          <div class="nav-sub-rail active" id="nav-panel-news" data-nav-panel="news" role="tabpanel"><a href="#ai" class="nav-item nav-sub-item" data-section="ai" data-nav-group="news">AI &amp; 机器学习 <span class="nav-count">45</span></a>
+<a href="#semiconductors" class="nav-item nav-sub-item" data-section="semiconductors" data-nav-group="news">半导体 &amp; 芯片 <span class="nav-count">2</span></a>
+<a href="#cloud" class="nav-item nav-sub-item" data-section="cloud" data-nav-group="news">云计算 &amp; 企业软件 <span class="nav-count">3</span></a>
+<a href="#policy" class="nav-item nav-sub-item" data-section="policy" data-nav-group="news">政治 &amp; 政策 <span class="nav-count">37</span></a>
+<a href="#fintech" class="nav-item nav-sub-item" data-section="fintech" data-nav-group="news">金融市场 &amp; 金融科技 <span class="nav-count">22</span></a>
+<a href="#healthcare" class="nav-item nav-sub-item" data-section="healthcare" data-nav-group="news">医疗健康 <span class="nav-count">1</span></a>
+<a href="#consumer-electronics" class="nav-item nav-sub-item" data-section="consumer-electronics" data-nav-group="news">消费电子 <span class="nav-count">6</span></a>
+<a href="#ev" class="nav-item nav-sub-item" data-section="ev" data-nav-group="news">电动汽车 &amp; 交通 <span class="nav-count">5</span></a>
+<a href="#security" class="nav-item nav-sub-item" data-section="security" data-nav-group="news">网络安全 &amp; 隐私 <span class="nav-count">9</span></a>
+<a href="#space" class="nav-item nav-sub-item" data-section="space" data-nav-group="news">航天航空 <span class="nav-count">4</span></a>
+<a href="#social" class="nav-item nav-sub-item" data-section="social" data-nav-group="news">社交媒体 <span class="nav-count">2</span></a>
+<a href="#gaming" class="nav-item nav-sub-item" data-section="gaming" data-nav-group="news">游戏 &amp; 娱乐 <span class="nav-count">4</span></a>
+<a href="#society" class="nav-item nav-sub-item" data-section="society" data-nav-group="news">社会事件 &amp; 法治 <span class="nav-count">2</span></a>
+<a href="#lifestyle" class="nav-item nav-sub-item" data-section="lifestyle" data-nav-group="news">生活方式 &amp; 文化 <span class="nav-count">6</span></a>
+<a href="#sports" class="nav-item nav-sub-item" data-section="sports" data-nav-group="news">体育赛事 <span class="nav-count">3</span></a>
+<a href="#general" class="nav-item nav-sub-item" data-section="general" data-nav-group="news">综合 <span class="nav-count">8</span></a></div>
+          <div class="nav-sub-rail" id="nav-panel-subscription" data-nav-panel="subscription" role="tabpanel"><a href="#podcasts" class="nav-item nav-sub-item" data-section="podcasts" data-nav-group="subscription">🎙️ 播客 <span class="nav-count">2</span></a></div>
         </div>
       </div>
     </nav>
@@ -227,7 +225,7 @@
     </section>
   
       
-        <section id="ai" class="category-section">
+        <section id="ai" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">AI &amp; 机器学习</h2>
             <span class="category-count">45 篇文章 · 7 个主题</span>
@@ -1019,7 +1017,7 @@
           </div>
         </section>
 
-        <section id="semiconductors" class="category-section">
+        <section id="semiconductors" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">半导体 &amp; 芯片</h2>
             <span class="category-count">2 篇文章 · 2 个主题</span>
@@ -1154,7 +1152,7 @@
           </div>
         </section>
 
-        <section id="cloud" class="category-section">
+        <section id="cloud" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">云计算 &amp; 企业软件</h2>
             <span class="category-count">3 篇文章 · 2 个主题</span>
@@ -1298,7 +1296,7 @@
           </div>
         </section>
 
-        <section id="policy" class="category-section">
+        <section id="policy" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">政治 &amp; 政策</h2>
             <span class="category-count">37 篇文章 · 4 个主题</span>
@@ -1856,7 +1854,7 @@
           </div>
         </section>
 
-        <section id="fintech" class="category-section">
+        <section id="fintech" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">金融市场 &amp; 金融科技</h2>
             <span class="category-count">22 篇文章 · 4 个主题</span>
@@ -2279,7 +2277,7 @@
           </div>
         </section>
 
-        <section id="healthcare" class="category-section">
+        <section id="healthcare" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">医疗健康</h2>
             <span class="category-count">1 篇文章 · 1 个主题</span>
@@ -2351,7 +2349,7 @@
           </div>
         </section>
 
-        <section id="consumer-electronics" class="category-section">
+        <section id="consumer-electronics" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">消费电子</h2>
             <span class="category-count">6 篇文章 · 3 个主题</span>
@@ -2576,7 +2574,7 @@
           </div>
         </section>
 
-        <section id="ev" class="category-section">
+        <section id="ev" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">电动汽车 &amp; 交通</h2>
             <span class="category-count">5 篇文章 · 3 个主题</span>
@@ -2789,7 +2787,7 @@
           </div>
         </section>
 
-        <section id="security" class="category-section">
+        <section id="security" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">网络安全 &amp; 隐私</h2>
             <span class="category-count">9 篇文章 · 6 个主题</span>
@@ -3203,7 +3201,7 @@
           </div>
         </section>
 
-        <section id="space" class="category-section">
+        <section id="space" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">航天航空</h2>
             <span class="category-count">4 篇文章 · 2 个主题</span>
@@ -3356,7 +3354,7 @@
           </div>
         </section>
 
-        <section id="social" class="category-section">
+        <section id="social" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">社交媒体</h2>
             <span class="category-count">2 篇文章 · 2 个主题</span>
@@ -3491,7 +3489,7 @@
           </div>
         </section>
 
-        <section id="gaming" class="category-section">
+        <section id="gaming" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">游戏 &amp; 娱乐</h2>
             <span class="category-count">4 篇文章 · 2 个主题</span>
@@ -3644,7 +3642,7 @@
           </div>
         </section>
 
-        <section id="society" class="category-section">
+        <section id="society" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">社会事件 &amp; 法治</h2>
             <span class="category-count">2 篇文章 · 1 个主题</span>
@@ -3725,7 +3723,7 @@
           </div>
         </section>
 
-        <section id="lifestyle" class="category-section">
+        <section id="lifestyle" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">生活方式 &amp; 文化</h2>
             <span class="category-count">6 篇文章 · 3 个主题</span>
@@ -3950,7 +3948,7 @@
           </div>
         </section>
 
-        <section id="sports" class="category-section">
+        <section id="sports" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">体育赛事</h2>
             <span class="category-count">3 篇文章 · 1 个主题</span>
@@ -4040,7 +4038,7 @@
           </div>
         </section>
 
-        <section id="general" class="category-section">
+        <section id="general" class="category-section" data-nav-group="news">
           <div class="category-header">
             <h2 class="category-title">综合</h2>
             <span class="category-count">8 篇文章 · 3 个主题</span>
@@ -4291,7 +4289,7 @@
         <span class="content-block-subtitle">2 篇内容 · 1 个分类</span>
       </div>
       
-        <section id="podcasts" class="category-section">
+        <section id="podcasts" class="category-section" data-nav-group="subscription">
           <div class="category-header">
             <h2 class="category-title">🎙️ 播客</h2>
             <span class="category-count">2 篇文章 · 2 个主题</span>
@@ -4486,78 +4484,89 @@
   </div>
 
   
+    
     <div class="mobile-overlay" id="mobileOverlay"></div>
-    <div class="mobile-sheet" id="mobileSheet">
+    <div class="mobile-sheet" id="mobileSheet" data-default-nav-group="news">
       <div class="sheet-handle"></div>
       <div class="sheet-title">📑 分类目录</div>
-      <a href="#podcasts" class="sheet-item" data-section="podcasts">
-      <span>🎙️ 播客</span>
-      <span class="sheet-item-count">2篇</span>
-    </a>
-<a href="#ai" class="sheet-item" data-section="ai">
+      <div class="sheet-group-switcher">
+        <button type="button" class="sheet-group-tab active" data-sheet-group="news" aria-pressed="true">📰 新闻</button>
+        <button type="button" class="sheet-group-tab" data-sheet-group="subscription" aria-pressed="false">📮 订阅消息</button>
+      </div>
+      <div class="sheet-group-panels">
+        <div class="sheet-group-panel active" data-sheet-panel="news">
+        <a href="#ai" class="sheet-item" data-section="ai" data-nav-group="news">
       <span>AI &amp; 机器学习</span>
       <span class="sheet-item-count">45篇</span>
     </a>
-<a href="#semiconductors" class="sheet-item" data-section="semiconductors">
+<a href="#semiconductors" class="sheet-item" data-section="semiconductors" data-nav-group="news">
       <span>半导体 &amp; 芯片</span>
       <span class="sheet-item-count">2篇</span>
     </a>
-<a href="#cloud" class="sheet-item" data-section="cloud">
+<a href="#cloud" class="sheet-item" data-section="cloud" data-nav-group="news">
       <span>云计算 &amp; 企业软件</span>
       <span class="sheet-item-count">3篇</span>
     </a>
-<a href="#policy" class="sheet-item" data-section="policy">
+<a href="#policy" class="sheet-item" data-section="policy" data-nav-group="news">
       <span>政治 &amp; 政策</span>
       <span class="sheet-item-count">37篇</span>
     </a>
-<a href="#fintech" class="sheet-item" data-section="fintech">
+<a href="#fintech" class="sheet-item" data-section="fintech" data-nav-group="news">
       <span>金融市场 &amp; 金融科技</span>
       <span class="sheet-item-count">22篇</span>
     </a>
-<a href="#healthcare" class="sheet-item" data-section="healthcare">
+<a href="#healthcare" class="sheet-item" data-section="healthcare" data-nav-group="news">
       <span>医疗健康</span>
       <span class="sheet-item-count">1篇</span>
     </a>
-<a href="#consumer-electronics" class="sheet-item" data-section="consumer-electronics">
+<a href="#consumer-electronics" class="sheet-item" data-section="consumer-electronics" data-nav-group="news">
       <span>消费电子</span>
       <span class="sheet-item-count">6篇</span>
     </a>
-<a href="#ev" class="sheet-item" data-section="ev">
+<a href="#ev" class="sheet-item" data-section="ev" data-nav-group="news">
       <span>电动汽车 &amp; 交通</span>
       <span class="sheet-item-count">5篇</span>
     </a>
-<a href="#security" class="sheet-item" data-section="security">
+<a href="#security" class="sheet-item" data-section="security" data-nav-group="news">
       <span>网络安全 &amp; 隐私</span>
       <span class="sheet-item-count">9篇</span>
     </a>
-<a href="#space" class="sheet-item" data-section="space">
+<a href="#space" class="sheet-item" data-section="space" data-nav-group="news">
       <span>航天航空</span>
       <span class="sheet-item-count">4篇</span>
     </a>
-<a href="#social" class="sheet-item" data-section="social">
+<a href="#social" class="sheet-item" data-section="social" data-nav-group="news">
       <span>社交媒体</span>
       <span class="sheet-item-count">2篇</span>
     </a>
-<a href="#gaming" class="sheet-item" data-section="gaming">
+<a href="#gaming" class="sheet-item" data-section="gaming" data-nav-group="news">
       <span>游戏 &amp; 娱乐</span>
       <span class="sheet-item-count">4篇</span>
     </a>
-<a href="#society" class="sheet-item" data-section="society">
+<a href="#society" class="sheet-item" data-section="society" data-nav-group="news">
       <span>社会事件 &amp; 法治</span>
       <span class="sheet-item-count">2篇</span>
     </a>
-<a href="#lifestyle" class="sheet-item" data-section="lifestyle">
+<a href="#lifestyle" class="sheet-item" data-section="lifestyle" data-nav-group="news">
       <span>生活方式 &amp; 文化</span>
       <span class="sheet-item-count">6篇</span>
     </a>
-<a href="#sports" class="sheet-item" data-section="sports">
+<a href="#sports" class="sheet-item" data-section="sports" data-nav-group="news">
       <span>体育赛事</span>
       <span class="sheet-item-count">3篇</span>
     </a>
-<a href="#general" class="sheet-item" data-section="general">
+<a href="#general" class="sheet-item" data-section="general" data-nav-group="news">
       <span>综合</span>
       <span class="sheet-item-count">8篇</span>
     </a>
+      </div>
+        <div class="sheet-group-panel" data-sheet-panel="subscription">
+        <a href="#podcasts" class="sheet-item" data-section="podcasts" data-nav-group="subscription">
+      <span>🎙️ 播客</span>
+      <span class="sheet-item-count">2篇</span>
+    </a>
+      </div>
+      </div>
       <a href="#" class="sheet-back-top" id="sheetBackTop">↑ 回到顶部</a>
     </div>
     <button class="mobile-fab" id="mobileFab" aria-label="打开分类目录">☰</button>

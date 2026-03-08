@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const categoryNav = document.querySelector('.category-nav');
   const navItems = document.querySelectorAll('.nav-item[data-section]');
-  const navGroupToggles = document.querySelectorAll('[data-nav-toggle]');
+  const navGroupTabs = document.querySelectorAll('.nav-group-tab[data-nav-group]');
+  const navGroupPanels = document.querySelectorAll('.nav-sub-rail[data-nav-panel]');
+  const sheetGroupTabs = document.querySelectorAll('.sheet-group-tab[data-sheet-group]');
+  const sheetGroupPanels = document.querySelectorAll('.sheet-group-panel[data-sheet-panel]');
+  const fab = document.getElementById('mobileFab');
+  const overlay = document.getElementById('mobileOverlay');
+  const sheet = document.getElementById('mobileSheet');
+  const sheetItems = document.querySelectorAll('.sheet-item[data-section]');
+  const backTop = document.getElementById('sheetBackTop');
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
   const copyPromptButtons = document.querySelectorAll('.copy-prompt-btn[data-copy-prompt="true"]');
   const shareTopicButtons = document.querySelectorAll('.share-topic-btn[data-share-topic="true"]');
   const briefAudioRoot = document.querySelector('[data-audio-player-root]');
@@ -430,31 +440,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Group sub-nav toggle (desktop)
-  navGroupToggles.forEach((toggle) => {
-    const targetId = toggle.getAttribute('data-nav-toggle');
-    if (!targetId) return;
-    const subNav = document.getElementById(targetId);
-    if (!subNav) return;
+  let activeNavGroup =
+    categoryNav?.getAttribute('data-default-nav-group') ||
+    sheet?.getAttribute('data-default-nav-group') ||
+    navGroupTabs[0]?.getAttribute('data-nav-group') ||
+    sheetGroupTabs[0]?.getAttribute('data-sheet-group') ||
+    'news';
 
-    toggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      toggle.classList.toggle('collapsed');
-      subNav.classList.toggle('collapsed');
+  function setActiveNavGroup(groupId) {
+    if (!groupId) return;
+    activeNavGroup = groupId;
+
+    navGroupTabs.forEach((tab) => {
+      const isActive = tab.getAttribute('data-nav-group') === groupId;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    navGroupPanels.forEach((panel) => {
+      panel.classList.toggle('active', panel.getAttribute('data-nav-panel') === groupId);
+    });
+
+    sheetGroupTabs.forEach((tab) => {
+      const isActive = tab.getAttribute('data-sheet-group') === groupId;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    sheetGroupPanels.forEach((panel) => {
+      panel.classList.toggle('active', panel.getAttribute('data-sheet-panel') === groupId);
+    });
+  }
+
+  function getGroupForTarget(target) {
+    if (!(target instanceof Element)) {
+      return null;
+    }
+
+    const section = target.classList.contains('category-section') ? target : target.closest('.category-section');
+    if (section instanceof HTMLElement) {
+      return section.getAttribute('data-nav-group');
+    }
+
+    return target.getAttribute('data-nav-group');
+  }
+
+  function scrollToSection(targetId, { closeMobileSheet = false } = {}) {
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const groupId = getGroupForTarget(target);
+    if (groupId) {
+      setActiveNavGroup(groupId);
+    }
+
+    const performScroll = () => {
+      const topbarHeight = document.querySelector('.tailnews-topbar')?.offsetHeight || 0;
+      const navHeight = mobileQuery.matches ? 0 : (categoryNav?.offsetHeight || 0);
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - topbarHeight - navHeight - 16;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    };
+
+    if (closeMobileSheet) {
+      closeSheet();
+      setTimeout(performScroll, 280);
+      return;
+    }
+
+    performScroll();
+  }
+
+  navGroupTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const groupId = tab.getAttribute('data-nav-group');
+      if (groupId) {
+        setActiveNavGroup(groupId);
+      }
     });
   });
+
+  sheetGroupTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const groupId = tab.getAttribute('data-sheet-group');
+      if (groupId) {
+        setActiveNavGroup(groupId);
+      }
+    });
+  });
+
+  setActiveNavGroup(activeNavGroup);
 
   // Desktop: click to scroll
   navItems.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('data-section');
-      const target = document.getElementById(targetId);
-      if (target) {
-        const navHeight = document.querySelector('.category-nav')?.offsetHeight || 0;
-        const targetPosition = target.offsetTop - navHeight - 20;
-        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-      }
+      scrollToSection(targetId);
     });
   });
 
@@ -463,12 +545,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateActiveNav() {
     const sections = document.querySelectorAll('.category-section');
-    let activeId = null;
+    let activeSection = null;
     for (const section of sections) {
       if (visibleSections.has(section.id)) {
-        activeId = section.id;
+        activeSection = section;
         break;
       }
+    }
+    const activeId = activeSection?.id || null;
+    const visibleGroupId = getGroupForTarget(activeSection);
+    if (visibleGroupId) {
+      setActiveNavGroup(visibleGroupId);
     }
     // Desktop nav
     navItems.forEach(item => {
@@ -478,19 +565,8 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.remove('active');
       }
     });
-    navGroupToggles.forEach((toggle) => {
-      const targetId = toggle.getAttribute('data-nav-toggle');
-      if (!targetId) return;
-      const subNav = document.getElementById(targetId);
-      const activeItem = subNav?.querySelector('.nav-sub-item.active');
-      if (activeItem) {
-        toggle.classList.add('active');
-      } else {
-        toggle.classList.remove('active');
-      }
-    });
     // Mobile sheet nav
-    document.querySelectorAll('.sheet-item[data-section]').forEach(item => {
+    sheetItems.forEach(item => {
       if (activeId && item.getAttribute('data-section') === activeId) {
         item.classList.add('active');
       } else {
@@ -515,12 +591,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Mobile FAB & Bottom Sheet
-  const fab = document.getElementById('mobileFab');
-  const overlay = document.getElementById('mobileOverlay');
-  const sheet = document.getElementById('mobileSheet');
-  const sheetItems = document.querySelectorAll('.sheet-item[data-section]');
-  const backTop = document.getElementById('sheetBackTop');
-
   function openSheet() {
     if (!overlay || !sheet || !fab) return;
     overlay.classList.add('show');
@@ -562,14 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = item.getAttribute('data-section');
-      const target = document.getElementById(targetId);
-      closeSheet();
-      if (target) {
-        setTimeout(() => {
-          const targetPosition = target.offsetTop - 20;
-          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        }, 280);
-      }
+      scrollToSection(targetId, { closeMobileSheet: true });
     });
   });
 
@@ -583,9 +646,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 280);
     });
   }
-
-  // Collapsible topic cards (mobile only)
-  const mobileQuery = window.matchMedia('(max-width: 768px)');
 
   function syncCardExpandedState(card) {
     const header = card.querySelector('.topic-header');
@@ -624,6 +684,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!targetId) return;
     const target = document.getElementById(targetId);
     if (!target) return;
+
+    const groupId = getGroupForTarget(target);
+    if (groupId) {
+      setActiveNavGroup(groupId);
+    }
 
     const card = target.classList.contains('topic-card') ? target : target.closest('.topic-card');
     if (card && card.classList.contains('collapsed')) {
