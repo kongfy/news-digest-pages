@@ -1,6 +1,12 @@
 {
   "items": [
     {
+      "date": "2026-04-22",
+      "weekday": "星期三",
+      "fileName": "digest-2026-04-22.html",
+      "label": "2026-04-22 星期三"
+    },
+    {
       "date": "2026-04-21",
       "weekday": "星期二",
       "fileName": "digest-2026-04-21.html",
