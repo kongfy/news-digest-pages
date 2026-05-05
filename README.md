@@ -3,9 +3,9 @@
 Auto-published static news digest.
 
 - Latest digest: [index.html](./index.html)
-- Latest snapshot: [digest-2026-05-05.html](./digest-2026-05-05.html)
+- Latest snapshot: [digest-2026-05-06.html](./digest-2026-05-06.html)
 - Archive manifest: [archive.json](./archive.json)
-- Updated at: 2026-05-05 07:50:11 +0800
+- Updated at: 2026-05-06 07:59:46 +0800
 
 ## Deployment Notes
 
