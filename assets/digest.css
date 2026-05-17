@@ -1122,6 +1122,19 @@
     padding: 0;
   }
 
+  .topic-image {
+    margin: 0;
+    background: var(--tn-gray-100);
+    border-bottom: 1px solid var(--tn-gray-300);
+  }
+
+  .topic-image img {
+    display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+  }
+
   .article-item {
     padding: 14px 16px;
     border-bottom: 1px solid var(--tn-gray-300);
@@ -1949,6 +1962,10 @@
 
     .article-item {
       padding: 12px;
+    }
+
+    .topic-image img {
+      max-height: 220px;
     }
 
     .related-articles {
