@@ -1126,13 +1126,19 @@
     margin: 0;
     background: var(--tn-gray-100);
     border-bottom: 1px solid var(--tn-gray-300);
+    height: clamp(190px, 34vw, 320px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .topic-image img {
     display: block;
     width: 100%;
-    max-height: 320px;
-    object-fit: cover;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
   }
 
   .article-item {
@@ -1965,7 +1971,7 @@
     }
 
     .topic-image img {
-      max-height: 220px;
+      height: 100%;
     }
 
     .related-articles {
