@@ -1,6 +1,18 @@
 {
   "items": [
     {
+      "date": "2026-06-18",
+      "weekday": "星期四",
+      "fileName": "digest-2026-06-18.html",
+      "label": "2026-06-18 星期四"
+    },
+    {
+      "date": "2026-06-17",
+      "weekday": "星期三",
+      "fileName": "digest-2026-06-17.html",
+      "label": "2026-06-17 星期三"
+    },
+    {
       "date": "2026-06-16",
       "weekday": "星期二",
       "fileName": "digest-2026-06-16.html",
@@ -47,18 +59,6 @@
       "weekday": "星期二",
       "fileName": "digest-2026-06-09.html",
       "label": "2026-06-09 星期二"
-    },
-    {
-      "date": "2026-06-08",
-      "weekday": "星期一",
-      "fileName": "digest-2026-06-08.html",
-      "label": "2026-06-08 星期一"
-    },
-    {
-      "date": "2026-06-07",
-      "weekday": "星期日",
-      "fileName": "digest-2026-06-07.html",
-      "label": "2026-06-07 星期日"
     }
   ]
 }
