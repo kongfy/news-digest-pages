@@ -1,6 +1,12 @@
 {
   "items": [
     {
+      "date": "2026-08-07",
+      "weekday": "星期五",
+      "fileName": "digest-2026-08-07.html",
+      "label": "2026-08-07 星期五"
+    },
+    {
       "date": "2026-08-06",
       "weekday": "星期四",
       "fileName": "digest-2026-08-06.html",
@@ -47,18 +53,6 @@
       "weekday": "星期四",
       "fileName": "digest-2026-07-30.html",
       "label": "2026-07-30 星期四"
-    },
-    {
-      "date": "2026-07-29",
-      "weekday": "星期三",
-      "fileName": "digest-2026-07-29.html",
-      "label": "2026-07-29 星期三"
-    },
-    {
-      "date": "2026-07-28",
-      "weekday": "星期二",
-      "fileName": "digest-2026-07-28.html",
-      "label": "2026-07-28 星期二"
     }
   ]
 }
