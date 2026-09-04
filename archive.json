@@ -1,6 +1,42 @@
 {
   "items": [
     {
+      "date": "2026-09-05",
+      "weekday": "星期六",
+      "fileName": "digest-2026-09-05.html",
+      "label": "2026-09-05 星期六"
+    },
+    {
+      "date": "2026-09-04",
+      "weekday": "星期五",
+      "fileName": "digest-2026-09-04.html",
+      "label": "2026-09-04 星期五"
+    },
+    {
+      "date": "2026-09-03",
+      "weekday": "星期四",
+      "fileName": "digest-2026-09-03.html",
+      "label": "2026-09-03 星期四"
+    },
+    {
+      "date": "2026-09-02",
+      "weekday": "星期三",
+      "fileName": "digest-2026-09-02.html",
+      "label": "2026-09-02 星期三"
+    },
+    {
+      "date": "2026-09-01",
+      "weekday": "星期二",
+      "fileName": "digest-2026-09-01.html",
+      "label": "2026-09-01 星期二"
+    },
+    {
+      "date": "2026-08-31",
+      "weekday": "星期一",
+      "fileName": "digest-2026-08-31.html",
+      "label": "2026-08-31 星期一"
+    },
+    {
       "date": "2026-08-30",
       "weekday": "星期日",
       "fileName": "digest-2026-08-30.html",
@@ -53,24 +89,6 @@
       "weekday": "星期六",
       "fileName": "digest-2026-08-22.html",
       "label": "2026-08-22 星期六"
-    },
-    {
-      "date": "2026-08-21",
-      "weekday": "星期五",
-      "fileName": "digest-2026-08-21.html",
-      "label": "2026-08-21 星期五"
-    },
-    {
-      "date": "2026-08-20",
-      "weekday": "星期四",
-      "fileName": "digest-2026-08-20.html",
-      "label": "2026-08-20 星期四"
-    },
-    {
-      "date": "2026-08-19",
-      "weekday": "星期三",
-      "fileName": "digest-2026-08-19.html",
-      "label": "2026-08-19 星期三"
     }
   ]
 }
